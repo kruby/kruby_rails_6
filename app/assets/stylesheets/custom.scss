@@ -1,0 +1,523 @@
+$kruby-pick-100: #6facdc;
+$kruby-blue-100: #6facdc;
+$kruby-green-100:#40a236;
+$kruby-red-100:#ba1f2c;
+$kruby-black:#000000;
+$kruby-grey: #333333;
+$kruby-light-grey: #999999;
+$kruby-white:#FFFFFF;
+//$kruby-blue-100: #44744c;
+
+$kruby-150:darken($kruby-pick-100, 50%);
+$kruby-140:darken($kruby-pick-100, 40%);
+$kruby-130:darken($kruby-pick-100, 30%);
+$kruby-120:darken($kruby-pick-100, 20%);
+$kruby-110:darken($kruby-pick-100, 10%);
+$kruby-100:lighten($kruby-pick-100, 0%);
+$kruby-95:lighten($kruby-pick-100, 5%);
+$kruby-90:lighten($kruby-pick-100, 10%);
+$kruby-85:lighten($kruby-pick-100, 15%);
+$kruby-80:lighten($kruby-pick-100, 20%);
+$kruby-75:lighten($kruby-pick-100, 25%);
+$kruby-70:lighten($kruby-pick-100, 30%);
+$kruby-65:lighten($kruby-pick-100, 35%);
+$kruby-60:lighten($kruby-pick-100, 40%);
+$kruby-55:lighten($kruby-pick-100, 45%);
+$kruby-50:lighten($kruby-pick-100, 50%);
+$kruby-45:lighten($kruby-pick-100, 55%);
+$kruby-40:lighten($kruby-pick-100, 60%);
+
+$kruby-background: $kruby-white;
+$kruby-background-frontend: $kruby-white;
+$kruby-background-backend: $kruby-white;
+
+//$kruby-blue-medium: #93bee3;
+//$kruby-blue-light: #C9E9FF;
+
+.date-select {
+    margin-top: 7px;
+}
+
+div.panel-group {
+    padding-bottom: 5px;
+    padding-left: 0px;
+}
+div.post {
+    margin-bottom: 10px;
+}
+
+* {
+//    font-family: 'Ubuntu', arial, sans-serif;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+}
+
+body {
+    font-size: 14px;
+}
+
+div.table-responsive th {
+    font-weight: bold;
+}
+
+div.table-responsive th a.sort_link {
+    font-weight: bold;
+    color: $kruby-130;
+}
+
+div.table-responsive th a.sort_link {
+    font-weight: bold;
+    color: $kruby-130;
+    &:hover {
+        color: $kruby-100;
+    }
+}
+
+
+
+h1,h2,h3,h4,h5,h6,p {
+    line-height: 1.4;
+//    font-family: 'Ubuntu', arial, sans-serif;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+}
+
+br {
+    line-height: 1.6;
+}
+
+p {
+    font-size: 14px;
+}
+
+h1 { font-size: 1.7em; }
+h2 { font-size: 1.3em; }
+h3 { font-size: 1.2em; }
+h4 { font-size: 0.5em; }
+h5 { font-size: 0.4em; }
+h6 { font-size: 0.3em; }
+
+body {
+    background-color: $kruby-background;
+}
+
+.navbar-nav>li a {
+    font-size: 14px;
+}
+
+.fancybox-nav span {
+    visibility: visible;
+}
+
+body.frontend {
+    background-color: $kruby-background-frontend;
+}
+
+body.backend {
+    background-color: $kruby-background-backend;
+}
+
+.panel-default > .panel-heading {
+    background-color: $kruby-95;
+    border: 1px solid $kruby-light-grey;
+}
+
+div.panel-body p img {
+    width: 100%;
+}
+
+.panel-default {
+    border-color: $kruby-70;
+}
+
+.forside-header {
+    color: $kruby-white;
+    margin: 0px 0px 1px 4px;
+    font-size: 0.6;
+}
+
+table.tabel_timer {
+    float: left;
+    margin-right: 20px;
+    width: 20%;
+}
+
+.move-left {
+    margin-left: -10px;
+}
+
+a.activated, a.passified {
+    width: 25px;
+}
+
+a.activated {
+    background-color: lighten($kruby-green-100, 40%);
+}
+
+a.passified {
+    background-color: lighten($kruby-red-100, 40%);
+}
+
+a {
+    color: $kruby-grey;
+    text-decoration: none;
+}
+
+tr.row-fluid td.year {
+    padding-left: 5%;
+}
+
+span.year_link {
+    padding-right: 10%;
+}
+
+tr.row-fluid td.month {
+    padding-left: 6%;
+}
+
+span.month_link {
+    padding-right: 20%;
+}
+
+tr.row-fluid td.hour, tr.row-fluid th.hour {
+    padding-left: 7%;
+}
+
+span.hour_date {
+    padding-right: 40%;
+}
+
+img.forside-img.img-thumbnail {
+    margin-right: 3px;
+    height: 24px;
+    padding: 2px;
+}
+
+.forside-header {
+    color: $kruby-white;
+    margin: 0px 0px 5px 4px;
+    font-size: 0.6;
+}
+
+div.panel-heading div.attachments {
+    height: auto;
+    overflow: auto;
+}
+
+div.panel-heading div.attachments ul[id^="sort_attachments"], div.panel-heading div.attachments ul#no_sort_attachments {
+    overflow: auto;
+    padding: 3px;
+    margin-bottom: 0px;
+}
+
+div.panel-heading div.attachments li.attachment {
+    float: left;
+    position: relative;
+    display: block;
+    list-style-type: none;
+}
+
+h4.panel-title a.link_forside {
+    text-decoration: none;
+}
+
+h4.panel-title a.link_forside:hover {
+    text-decoration: none;
+    color:$kruby-90;
+}
+
+h4.panel-title a.link_forside:visited {
+    text-decoration: none;
+    color:$kruby-95;
+}
+h4.panel-title a.forside:active {
+    text-decoration: none;
+    color:$kruby-95;
+}
+
+td div.btn-group {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+
+div.btn-group.index {
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+
+div.table-responsive {
+    margin-top: 10px;
+}
+
+.carousel-inner > .item > img { margin: 0 auto; }
+
+div.carousel-caption h1 {
+    font-size: 3vw;
+}
+.carousel-inner {
+    height: auto;
+    margin-bottom: 8px;
+}
+
+div.panel.panel-default.blog_posts {
+    margin-bottom: 10px;
+}
+
+div.panel.panel-default.blog_posts h3 {
+    margin-top: 6px;
+    margin-bottom: 8px;
+}
+
+.date_and_author {
+    font-size: 12px;
+    margin-top: 5px;
+    margin-left: 3px;
+    font-weight: normal;
+    color: $kruby-white;
+}
+
+.date_and_author_grey {
+    font-size: 12px;
+    margin-top: 5px;
+    margin-left: 3px;
+    font-weight: normal;
+    color: $kruby-90;
+}
+
+
+.table > tbody > tr > td {
+    vertical-align: middle;
+}
+
+.container .jumbotron {
+    background-color: $kruby-75;
+}
+
+div.container div.blogposts {
+  display: block;
+  width: 65%;
+  float: left;
+  height: 100%;
+}
+
+div.container div.facebook {
+  border: 1px solid #999999;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+  display: block;
+  width: 33%;
+  float: right;
+  height: auto;
+  background-color: $kruby-75;
+  padding: 10px;
+  overflow: auto;
+}
+
+@media only screen and (max-width: 1200px) {
+  div.container div.blogposts {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  
+  div.container div.facebook {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  
+  div.container div.facebook div.fb-wrapper {
+    overflow: auto;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+
+div.container div.facebook p {
+  padding: 3px;
+  font-weight: bold;
+}
+
+.alert {
+    border-radius: 0px;
+}
+
+label {
+    margin-bottom: 2px;
+}
+.btn-info {
+    background-color: $kruby-100;
+    border-color: $kruby-80;
+    &:hover {
+        background-color: darken($kruby-100, 10%);
+    }
+    a {
+        color: $kruby-white;
+        &:visited   {
+            color: $kruby-white;   
+        }
+    }
+}
+ 
+
+a:active {
+    text-decoration: none;  
+}
+
+a:hover {
+    text-decoration: none;  
+}
+
+a:hover h2 {
+    color: $kruby-110;
+}
+
+.navbar {
+    margin-bottom: 1px;
+    border-radius: 0px;
+    li a:visited {
+        color:$kruby-black;
+    }
+}
+
+.navbar-inverse .navbar-toggle {
+    border-color: $kruby-100;
+}
+
+.navbar-inverse {
+    background-color: $kruby-95;
+    border: 0px;
+    border-top: 1px solid $kruby-white;
+    &:hover {
+        color: $kruby-95;
+    }
+    &:visited {
+        color: $kruby-85;
+    }
+    &:active {
+        color: $kruby-85;
+    }
+    .navbar-nav .open a {
+        &:focus {
+            background-color: $kruby-90;
+        }
+        &:visited {
+            background-color: $kruby-90;
+        }
+    }
+    .navbar-nav li a {
+        color: $kruby-white;
+        &:hover {
+            background-color: $kruby-90;   
+        }
+    }
+    .navbar-nav li .dropdown-menu {
+        background-color: $kruby-100;
+        a:hover {
+            background-color: $kruby-90;
+        }
+    }
+    .navbar-nav .active a {
+        background-color: $kruby-90;
+        &:hover {
+            background-color: $kruby-85;
+        }
+        &:focus {
+            background-color: $kruby-90;
+        }
+    }       
+}
+
+.navbar-inverse .navbar-nav .open .dropdown-menu > li > a {
+    color: $kruby-white;
+    &:hover {
+        background-color: $kruby-90;   
+    } 
+    &:active {
+        background-color: $kruby-90;   
+    }
+    &:visited {
+        background-color: $kruby-90;   
+    } 
+}
+
+li.dropdown, li.open {
+    background-color: $kruby-95;
+}
+
+header {
+    background-color: $kruby-100;
+    /*	background-image: url(kruby-background_sky.jpg);*/
+}
+
+.navbar-inverse .navbar-nav .open .dropdown-menu .divider {
+    background-color: $kruby-white;
+}
+
+
+.navbar-inverse .navbar-collapse {
+    border-color: $kruby-white;
+}
+
+.navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
+    background-color: $kruby-100;
+}
+
+
+#voucher_status #voucher_text span#voucher_red {
+    color: $kruby-red-100;
+}
+
+//CSS TIL UNDERMENUER I BOOTSTRAP 3
+
+
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu>.dropdown-menu {
+    top: 10%;
+    left: -95%;
+    right: 95%;
+    margin-top: -6px;
+    margin-left: -1px;
+    -webkit-border-radius: 6px 6px 6px 6px;
+    -moz-border-radius: 6px 6px 6px;
+    border-radius: 6px 6px 6px 6px;
+}
+
+.dropdown-submenu:hover>.dropdown-menu {
+    display: block;
+}
+
+.dropdown-submenu>a:after {
+    display: block;
+    content: " ";
+    float: right;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 5px 0 5px 5px;
+    border-left-color: #ccc;
+    margin-top: 5px;
+    margin-right: -10px;
+}
+
+.dropdown-submenu:hover>a:after {
+    border-left-color: #fff;
+}
+
+.dropdown-submenu.pull-left {
+    float: none;
+}
+
+.dropdown-submenu.pull-left>.dropdown-menu {
+    left: -100%;
+    margin-left: 10px;
+    -webkit-border-radius: 6px 0 6px 6px;
+    -moz-border-radius: 6px 0 6px 6px;
+    border-radius: 6px 0 6px 6px;
+}

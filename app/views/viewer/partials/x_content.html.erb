@@ -1,0 +1,150 @@
+<nav id="myNavbar" class="navbar navbar-default" role="navigation"> 
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbarCollapse"> 
+                <span class="sr-only">Toggle navigation</span> 
+                <span class="icon-bar"></span> 
+                <span class="icon-bar"></span> 
+                <span class="icon-bar"></span> 
+            </button>
+            <a class="navbar-brand" href="#">Scrollspy</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#section-1">Section 1</a></li>
+                <li><a href="#section-2">Section 2</a></li>
+                <li><a href="#section-3">Section 3</a></li>
+                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Section 4<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#section-4dot1">Section 4.1</a></li>
+                        <li><a href="#section-4dot2">Section 4.2</a></li>
+                        <li><a href="#section-4dot3">Section 4.3</a></li>
+                    </ul>
+                </li>
+                <li><a href="#section-5">Section 5</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+	<%= render 'menusystem/navigation_admin' %>
+	
+	<div class="panel-group" id="accordion">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+						Collapsible Group Item #1
+					</a>
+				</h4>
+			</div>
+		</div>
+		<div id="collapseOne" class="panel-collapse collapse">
+			<div class="panel-group" id="accordion1-1">
+				<div class="panel-default panel-heading level_1">
+					<h4 class="panel-title">
+						<a data-toggle="collapse" data-parent="#accordion1-1" href="#collapseOne-One">
+							Collapsible Group Item #1-1
+						</a>
+					</h4>
+				</div>
+				<div id="collapseOne-One" class="panel-collapse collapse level_2">
+					<div class="panel-group" id="accordion1-1">
+						<div class="panel-default panel-heading">
+							<h4 class="panel-title">
+								<a data-toggle="collapse" data-parent="#accordion1-1-1" href="#collapseOne-One-One">
+									Collapsible Group Item #1-1-1
+								</a>
+							</h4>
+						</div>
+						<div id="collapseOne-One-One" class="panel-collapse collapse level_3">
+							<table border="0" cellspacing="5" cellpadding="5">
+								<tr><th>Header 1</th><th>Header 2</th><th>Header 3</th></tr>
+								<tr><td>Data 2</td><td>Data 2</td><td>Data 3</td></tr>
+								<tr><td>Data 2</td><td>Data 2</td><td>Data 3</td></tr>
+								<tr><td>Data 2</td><td>Data 2</td><td>Data 3</td></tr>
+								<tr><td>Data 2</td><td>Data 2</td><td>Data 3</td></tr>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+
+	
+	
+	<div class="panel-group" id="accordion2">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<a data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+						Collapsible Group Item #2
+					</a>
+				</h4>
+			</div>
+			<div id="collapseTwo" class="panel-collapse collapse">
+				<div class="panel-body">
+					<div class="panel-group" id="accordion2-2">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion2-2" href="#collapseTwo-Two">
+										Collapsible Group Item #2-2
+									</a>
+								</h4>
+							</div>
+							<div id="collapseTwo-Two" class="panel-collapse collapse">
+								<div class="panel-body">
+									<div class="panel-group" id="accordion2-2">
+										<div class="panel panel-default">
+											<div class="panel-heading">
+												<h4 class="panel-title">
+													<a data-toggle="collapse" data-parent="#accordion2-2-2" href="#collapseTwo-Two-Two">
+														Collapsible Group Item #2-2-2
+													</a>
+												</h4>
+											</div>
+											<div id="collapseTwo-Two-Two" class="panel-collapse collapse">
+												<div class="panel-body">
+													<table border="0" cellspacing="5" cellpadding="5">
+														<tr><th>Header 1</th><th>Header 2</th><th>Header 3</th></tr>
+														<tr><td>Data 2</td><td>Data 2</td><td>Data 3</td></tr>
+														<tr><td>Data 2</td><td>Data 2</td><td>Data 3</td></tr>
+														<tr><td>Data 2</td><td>Data 2</td><td>Data 3</td></tr>
+														<tr><td>Data 2</td><td>Data 2</td><td>Data 3</td></tr>
+													</table>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+    
+
+<div class="jumbotron">
+    <div class="container">
+        <h2>Velkommen til Kruby <input type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target="#toggleText" value="Vis mere"></h2>
+        <div id="toggleText" class="collapse">
+            <p class="small">
+                <%= @page.body %><br>
+                <% @posts.each do |p| %>
+                    <%= p.title + " - " + p.id.to_s %><br>
+                <% end%>
+            </p>
+        </div>
+        
+        <iframe src="http://kruby.dk/" width="100%" height="1000px" id="rails_iframe">error!</iframe>
+        
+        
+
+        
+    </div>
+</div>

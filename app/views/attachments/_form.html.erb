@@ -1,0 +1,55 @@
+<%= form_for(@attachment, html: {class: 'form-horizontal', role: 'form'}) do |f| %>
+<% if @attachment.errors.any? %>
+<div id="error_explanation">
+	<h2><%= pluralize(@attachment.errors.count, (t :error)) %> forhindrede denne attachment fra at blive vist:</h2>
+	<ul>
+		<% @attachment.errors.full_messages.each do |msg| %>
+		<li><%= msg %></li>
+		<% end %>
+	</ul>
+</div>
+<% end %>
+
+<div class="form-group">
+	<%= f.label :attachable_type, class: 'col-sm-2 control-label' %>
+	<div class="col-sm-10">	
+		<%= f.text_field :attachable_type, class: 'form-control' %>
+	</div>
+</div>
+<div class="form-group">
+	<%= f.label :attachable_id, class: 'col-sm-2 control-label' %>
+	<div class="col-sm-10">	
+		<%= f.number_field :attachable_id, class: 'form-control' %>
+	</div>
+</div>
+<div class="form-group">
+	<%= f.label :description, class: 'col-sm-2 control-label' %>
+	<div class="col-sm-10">	
+		<%= f.text_field :description, class: 'form-control' %>
+	</div>
+</div>
+<div class="form-group">
+	<%= f.label :image_size, class: 'col-sm-2 control-label' %>
+	<div class="col-sm-10">	
+		<%= f.text_field :image_size, class: 'form-control' %>
+	</div>
+</div>
+<div class="form-group">
+	<%= f.label :position, class: 'col-sm-2 control-label' %>
+	<div class="col-sm-10">	
+		<%= f.number_field :position, class: 'form-control' %>
+	</div>
+</div>
+<div class="form-group">
+	<%= f.label :asset_id, class: 'col-sm-2 control-label' %>
+	<div class="col-sm-10">	
+		<%= f.number_field :asset_id, class: 'form-control' %>
+	</div>
+</div>
+
+<div class='form-group'>
+	<div class="actions col-sm-offset-2 col-sm-10">
+		<%= f.submit('Opdater', class: 'btn btn-info btn-xs') %>
+	</div>
+</div>
+<% end %>

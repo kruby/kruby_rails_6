@@ -1,0 +1,54 @@
+<!-- Vi opdeler med content_for så vi kan styre hvad der bliver indsat hvor i viewer.html.erb under layouts -->
+<% content_for :head do %>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title><%= content_for?(:title) ? yield(:title) : "Kruby" %></title>
+<meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Kruby" %>">
+<link href="/assets/mini.gif" rel="shortcut icon"/>
+  <%= stylesheet_link_tag "application", media: "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+  <%= favicon_link_tag 'favicon.ico' %>
+  <%= google_font_link_tag 'Ubuntu:400,500,700'%>
+  <%= google_font_link_tag 'Fontdiner+Swanky'%>
+  <%= google_font_link_tag 'Just+Me+Again+Down+Here'%>
+  <%#= google_font_link_tag 'Oswald:300,400,700,'%>
+  <%#= google_font_link_tag 'Roboto:400,400italic,500,500italic,700,700italic,900,900italic,'%>
+  <%= google_font_link_tag 'Open+Sans+Condensed:700|Open+Sans:600,400,300'%>
+<% end%>
+
+<% content_for :body do %>
+  <%= render :partial => "viewer/partials/social_links_large_format.html.erb" %>
+  <header>
+    <%= image_tag "kruby_logo_top.png", :class => 'img-responsive', :alt => 'Kruby' %>
+    <%= render 'menusystem/navigation' %>
+  </header>
+  <main role="main">
+  </main>
+  
+  
+  <div class="container">
+    <h1 class="forside">Fodbold taktiske animationer</h1>
+    <%# Dir.chdir("public/film/") %>
+    <% filenames = Dir.entries(Rails.root.join("app/assets/videos/").to_s) %>
+    <% filenames.delete('.') %>
+    <% filenames.delete('..') %>
+    <% filenames.delete('.DS_Store') %><br>
+    <% paths = Dir["app/assets/videos/*.mov"] %>
+    <% files_and_paths = filenames.zip(paths).map{|k, v| {filename: k, pathname: v}} %>
+    <!-- <%# request.env['PATH_INFO'] %> FORTÆLLER HVILKEN STI DU BEFINDER DIG PÅ -->
+    <%# files_and_paths = files_and_paths.sort_by {v[:filename]} %>
+    <% files_and_paths.sort_by.each do |k| %>
+    <% pathname = k[:pathname] %>
+    <%# pathname.slice! 'public/' %>
+      <li>
+        <span class="movies glyphicon glyphicon-film" aria-hidden="true">
+          <%= link_to(k[:filename], download_file_path(path: pathname.to_s)) %>
+        </span>
+        <br>
+          <%#= link_to(k[:filename], download_file_path(path: pathname.to_s)) %>
+          <%= video_tag k[:filename], :size => "320x240", :controls => true %><br>
+          <!-- video_tag finder frem til film fordi der er oprettet konfigurations for assets/movies i appplication.rb -->
+        </li><br>
+    <% end %>
+  </div>
+<% end %>

@@ -1,0 +1,20 @@
+<% @link_text = I18n.l(month_date, format: :month) + ' - ' + number_with_delimiter(Hour.customer(partner.id).monthly_hours(month_date).sum(:number), locale: :da) %>
+<tr class="row-fluid">
+	<td colspan=12 class="text-left month">
+			<%= link_to @link_text, show_days_path(partner.id, year: year, month: month_date.month, q: params[:q]) %>
+	</td>
+</tr>
+
+<% if partner.id.to_s == params[:partner_id] and params[:year] == year.to_s and params[:month] == month_date.month.to_s %>
+	<tr class="row-fluid">
+		<th colspan=6 class="text-left hour">
+			Beskrivelse
+		</th>
+		<th colspan=1 class='text-center'>Ant.</th>
+		<th colspan=1 class='text-right'><span class="hour_date">Dato</span><%#= sort_link @q, :partner_company_and_date, 'Dato', :default_order => :desc  %></th>
+		<th colspan=3 class='text-right'></th>
+	</tr>
+	<% for hour in @hours %>
+		<%= render partial: 'partners/partials/days_specified', locals: {hour: hour} %>
+	<% end %>
+<% end %>

@@ -1,0 +1,40 @@
+<div class="container">
+	
+    <p id="notice"><%= notice %></p>
+
+        <p>
+        <strong>Attachable type:</strong>
+        <%= @attachment.attachable_type %>
+    </p>
+
+        <p>
+        <strong>Attachable:</strong>
+        <%= @attachment.attachable_id %>
+    </p>
+
+        <p>
+        <strong>Description:</strong>
+        <%= @attachment.description %>
+    </p>
+
+        <p>
+        <strong>Image size:</strong>
+        <%= @attachment.image_size %>
+    </p>
+
+        <p>
+        <strong>Position:</strong>
+        <%= @attachment.position %>
+    </p>
+
+        <p>
+        <strong>Asset:</strong>
+        <%= @attachment.asset_id %>
+    </p>
+
+    
+    <div class="btn-group">
+        <%= link_to 'Ret', edit_attachment_path(@attachment), class: 'btn btn-default btn-xs'%>
+        <%= link_to 'Tilbage', attachments_path, class: 'btn btn-default btn-xs' %>
+    </div>
+</div>

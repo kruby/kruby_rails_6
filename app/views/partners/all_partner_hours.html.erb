@@ -1,0 +1,115 @@
+<div class="container">
+
+  <h1>Time registrering</h1>
+
+  <div class="row">
+    <div class="col-lg-3">
+      <div class="timer">
+        <% @v_year_before_last_1 = Voucher.last_year_first_6_months(Time.now - 2.year).sum(:number) %>
+        <% @v_year_before_last_2 = Voucher.last_year_last_6_months(Time.now - 2.year).sum(:number) %>
+        <% @v_last_year_1 = Voucher.last_year_first_6_months(Time.now - 1.year).sum(:number) %>
+        <% @v_last_year_2 = Voucher.last_year_last_6_months(Time.now - 1.year).sum(:number) %>
+        <% @v_this_year_1 = Voucher.this_year_first_6_months(Time.now.to_date).sum(:number) %>
+        <% @v_this_year_2 = Voucher.this_year_last_6_months(Time.now.to_date).sum(:number) %>
+        <b>Købte timer totalt: <%= delimiter(Voucher.sum(:number)) %></b><br><br>
+        <b>Forrige år i alt: <%= delimiter(@v_year_before_last_1 + @v_year_before_last_2) %></b><br>
+        1. halvår <%= (Time.now - 2.year).year %> - <%= delimiter(@v_last_year_1) %><br>
+        2. halvår <%= (Time.now - 2.year).year %> - <%= delimiter(@v_last_year_2) %><br><br>
+        <b>Sidste år i alt: <%= delimiter(@v_last_year_1 + @v_last_year_2) %></b><br>
+        1. halvår <%= (Time.now - 1.year).year %> - <%= delimiter(@v_last_year_1) %><br>
+        2. halvår <%= (Time.now - 1.year).year %> - <%= delimiter(@v_last_year_2) %><br><br>
+        <b>Dette år i alt: <%= delimiter(@v_this_year_1 + @v_this_year_2) %></b><br>
+        1. halvår <%= (Time.now).year %> - <%= delimiter(@v_this_year_1) %><br>
+        2. halvår <%= (Time.now).year %> - <%= delimiter(@v_this_year_2) %><br>
+      </div>
+    </div>
+    <div class="col-lg-3">
+      <% @h_year_before_last_1 = Hour.last_year_first_6_months(Time.now - 2.year).sum(:number) %>
+      <% @h_year_before_last_2 = Hour.last_year_last_6_months(Time.now - 2.year).sum(:number) %>
+      <% @h_last_year_1 = Hour.last_year_first_6_months(Time.now - 1.year).sum(:number) %>
+      <% @h_last_year_2 = Hour.last_year_last_6_months(Time.now - 1.year).sum(:number) %>
+      <% @h_this_year_1 = Hour.this_year_first_6_months(Time.now.to_date).sum(:number) %>
+      <% @h_this_year_2 = Hour.this_year_last_6_months(Time.now.to_date).sum(:number) %>
+      <div class="timer">
+        <b>Brugte timer totalt: <%= delimiter(Hour.sum(:number)) %></b><br><br>
+        <b>Forrige år i alt: <%= delimiter(@h_year_before_last_1 + @h_year_before_last_2) %></b><br>
+        1. halvår <%= (Time.now - 2.year).year %> - <%= delimiter(@h_last_year_1)%><br>
+        2. halvår <%= (Time.now - 2.year).year %> - <%= delimiter(@h_last_year_2) %><br><br>
+        <b>Sidste år i alt: <%= delimiter(@h_last_year_1 + @h_last_year_2) %></b><br>
+        1. halvår <%= (Time.now - 1.year).year %> - <%= delimiter(@h_last_year_1)%><br>
+        2. halvår <%= (Time.now - 1.year).year %> - <%= delimiter(@h_last_year_2) %><br><br>
+        <b>Dette år i alt: <%= delimiter(@h_this_year_1 + @h_this_year_2) %></b><br>
+        1. halvår <%= (Time.now).year %> - <%= delimiter(@h_this_year_1) %><br>
+        2. halvår <%= (Time.now).year %> - <%= delimiter(@h_this_year_2) %><br>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="btn-group">
+    <%= link_to 'Ny registrering', new_hour_path, class: 'btn btn-default btn-xs' %>
+    <%= link_to 'Find alle', all_partner_hours_path, class: 'btn btn-default btn-xs' %>
+    <%= link_to 'Se alle klippekort', vouchers_path, class: 'btn btn-default btn-xs' %>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-striped table-hover">
+      <tr>
+        <th colspan="6" class='text-left visible-xs visible-sm visible-md visible-lg' >Kunde</th>
+        <th colspan="2" class='text-right visible-sm visible-md visible-lg' >Købt/Brugt</th>
+        <th colspan="2" class='text-right visible-sm visible-md visible-lg' >Gns. timepris</th>
+        <th colspan="2" class='text-right visible-xs visible-sm visible-md visible-lg' >Status</th>
+        <th colspan="2" class='text-right visible-xs visible-sm visible-md visible-lg' ></th>
+      </tr>
+      <% for partner in @partners %>
+      <% @partner = Partner.find(partner.id)%>
+      <% if @partner.hours.size > 0 %>
+      <tr>
+        <td colspan="6" class="text-left visible-xs visible-sm visible-md visible-lg">
+          <div id="voucher_customer">
+            <% @name = truncate(Partner.find(partner.id).name, length: 25) %>
+            <%= link_to @name, show_years_path(partner_id: partner.id, q: params[:q]), class: 'name'%>
+          </div>
+        </td>
+        <td colspan="2" class="text-right visible-sm visible-md visible-lg">
+          <div id="voucher_calc">
+            <span id="voucher_text">
+              (<%= delimiter(@partner.vouchers.sum(:number)) rescue nil %> 
+              - <%= delimiter(@partner.hours.sum(:number)) rescue nil %>)
+            </span>
+          </div>
+        </td>
+        <td colspan="2" class="text-right visible-sm visible-md visible-lg">
+          <div id="voucher_calc">
+            <span id="voucher_text"><%= delimiter(Voucher.average_hourly_rate_partner(@partner)) rescue nil %></span>
+          </div>
+        </td>
+        <td colspan="2" class="text-right visible-xs visible-sm visible-md visible-lg">
+          <div id="voucher_status">
+            <span id="voucher_text">
+              <% @result = @partner.vouchers.sum(:number) - @partner.hours.sum(:number) rescue nil %>
+              <% if @result < 0 %>
+              <span id='voucher_red'> <%= delimiter(@result) %></span> 
+              <% else %>
+              <span id='voucher_green'> <%= delimiter(@result) %></span> 
+              <% end %>
+            </span>
+          </div>
+        </td>
+				<td colspan="3" class="text-right">
+					<div class="btn-group">
+						<%= link_to 'Gør passiv', make_passive_path(partner.id), confirm: 'Vil du gøre denne partner passiv? (' + @partner.name + ')' , class: 'btn btn-default btn-xs' %>
+					</div>
+				</td>
+      </tr>
+      <% end %>
+      <% if partner.id.to_s == params[:partner_id] %>
+      <% for year in @years %>
+      <%= render partial: "partners/partials/years_specified", locals: {partner: partner, year: year} %>
+      <% end %>
+      <% end %>
+      <% end %>
+    </table>
+  </div>
+  <% if @partners.count == 1 %>
+    <%= render partial: "vouchers/partials/partner_vouchers", locals: {partner: partner} %>
+  <% end %>
+</div>

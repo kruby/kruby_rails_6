@@ -1,0 +1,27 @@
+<% for post in @posts %>
+<div class="forside_blog_wrapper">
+		
+<div class="blogpost">
+	
+	<div class="topline">
+	<span class="title">
+	<%= link_to post.title, post_path(post.id) %></span>
+	</div> <!-- topline -->
+	<div class="date_time"><%= post.created_at.strftime("%d.%m.%y - %H:%M") %> - <span class="author"><%= User.find(post.user_id).blogname rescue 'Kruby' %></span></div>
+		<div class="body">
+			<% @length = 350 %>
+			<td class='tekst_foto_1'><%= truncate(post.body, :length => @length, :separator => ' ' ).html_safe %></td>
+			<% if @length <= post.body.length %><br>
+			<%= link_to '(læs mere)', post_path(post.id), :class => 'links' %>
+			<% end %>
+			<td class='foto_1'> </td>
+		</div>
+		
+	<div class="bottomline"></div>
+	
+	</div> <!-- blogpost -->
+	
+</div> <!-- wrapper -->
+
+
+<% end %>

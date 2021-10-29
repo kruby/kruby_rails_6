@@ -1,0 +1,149 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+// Graphical variables
+/*@import "config/fonts";*/
+/*@import "config/colors";*/
+/*@import "config/bootstrap_variables";*/
+
+// External libraries
+@import "bootstrap/scss/bootstrap";
+
+//$navbar-default-bg: #312312;
+//$light-orange: #ff8c00;
+//$navbar-default-color: $light-orange;
+
+/*//Med @import kan du styre den nøjagtige rækkefølge for din css*/
+
+//@import "scaffolds";
+/*@import "bootstrap";
+//@import "custom";
+//@import "viewer";
+*/
+
+/*input.checkbox {
+	padding-top: 6px;
+}
+
+div .panel-body .swanky {
+    font-family: 'Fontdiner Swanky', arial, sans-serif;
+    font-size: 20px;
+}
+
+div .panel-body .justme {
+    font-family: 'Just Me Again Down Here', arial, sans-serif;
+    font-size: 20px;
+}
+
+
+body.backend div#social_links_large_format {
+	float: left;
+	position: absolute;
+	top: 97px;
+	left: 0px;
+}
+
+body.backend div#social_links_large_format a {
+	text-decoration: none;
+	border: none;
+	float: left;
+	margin-left: 6px;
+}
+
+body.backend div#social_links_large_format a img {
+	text-decoration: none;
+	border: none;
+}
+
+@media only screen and (min-width: 1201px) {
+    body.backend div#social_links_small_format {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+
+    body.backend div#social_links_large_format {
+    	display: none;
+    }
+
+    body.backend div#social_links_small_format {
+    	float: left;
+        position: relative;
+        top: 15px;
+        left: 10px;
+    }
+
+    body.backend div#social_links_small_format a {
+    text-decoration: none;
+    border: none;
+    float: left;
+    margin-left: 6px;
+    }
+
+}
+
+h2 div.btn-group {
+    margin-left: 5px;
+}
+
+// ics/ical css i partners
+
+.send_til_kalender {
+  margin-bottom: 5px;
+}
+.ics_checkbox_partner {
+  padding-left: 35px;
+}
+
+.next_action_partner {
+  padding-top: 6px;
+}
+
+div.ics_varighed_alarm select {
+  margin-left: -4px;
+}
+
+div.ics_varighed_alarm {
+  margin-bottom: 0px;
+}
+
+
+div.ics_varighed_alarm div.col-sm-2 {
+  margin-bottom: 10px;
+}
+
+div.ics_varighed_alarm div.ics_varighed {
+  margin-right: 20px;
+}
+
+div.ics_varighed_alarm div.col-sm-2 span.input-group-addon {
+  width: 85px;
+}
+
+select#partner_ics_duration, select#partner_ics_alarm {
+  width: 80px;
+}
+
+#images a img {
+  height: 40px;
+}
+
+span.movies {
+  margin-bottom: 10px;
+  margin-left: 2px;
+  font-size: 16px;
+}*/

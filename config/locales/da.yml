@@ -1,0 +1,121 @@
+da:
+    ckeditor:
+      page_title: 'CKEditor Files Manager'
+      confirm_delete: 'Slet filer?'
+      buttons:
+        cancel: 'Fortryd'
+        upload: 'Upload'
+        delete: 'Slet'
+        next: 'Næste'
+
+    address: adresse
+    category: kategori
+    city: by
+    company: firmanavn
+    contents: indholdsstyring
+    description: beskrivelse
+    email: email
+    homepage: www
+    id: id
+    log: log
+    name: navn
+    next_action: næste kontakt
+    pages: sider
+    phone: tlf.
+    postno: postnr.
+    responsible: ansvarlig
+    type: type
+    user_id: bruger ID
+    created_at_gteq: oprettet fra og med
+    created_at_lteq: oprettet til og med
+    search: søg
+    date_gteq: dato fra og med
+    date_lteq: dato til og med
+    
+    time:
+        formats:
+            nice: '%d.%m.%Y'
+            compact: '%d%m%y'
+
+    date:
+        order:
+          - :day
+          - :month
+          - :year
+        abbr_day_names:
+        - :Søn
+        - :Man
+        - :Tir
+        - :Ons
+        - :Tor
+        - :Fre
+        - :Lør
+        abbr_month_names:
+        - 
+        - :Jan
+        - :Feb
+        - :Mar
+        - :Apr
+        - :May
+        - :Jun
+        - :Jul
+        - :Aug
+        - :Sep
+        - :Okt
+        - :Nov
+        - :Dec
+        day_names:
+        - :Søndag
+        - :Mandag
+        - :Tirsdag
+        - :Onsdag
+        - :Torsdag
+        - :Fredag
+        - :Lørdag
+        formats:
+            birth: '%d.%m.'
+            default: '%D-%M-%Y'
+            long: '%d %B, %Y'
+            month_and_year: '%b %Y'
+            short: '%b %d'
+            nice: '%d.%m.%Y'
+            compact: '%d%m%y'
+            year: '%Y'
+            month: '%B'
+        month_names:
+        - 
+        - :Januar
+        - :Februar
+        - :Marts
+        - :April
+        - :Maj
+        - :Juni
+        - :Juli
+        - :August
+        - :September
+        - :Oktober
+        - :November
+        - :December
+
+    error: fejl
+
+    number:
+        format:
+            precision: 2
+            separator: ","
+            delimiter: "."
+            significant: false
+            strip_insignificant_zeros: false
+        # Bruges sammen med number_with_precision()
+        precision: 
+            format:
+                precision: 2
+                separator: ","
+                delimiter: "."
+        # Bruges sammen med number_to_currency
+        currency:
+            format:
+                precision: 2
+                separator: ","
+                delimiter: "."
+            

@@ -1,0 +1,54 @@
+<%= form_for(@voucher, html: {class: 'form-horizontal', role: 'form'}) do |f| %>
+<%= f.hidden_field(:user_id, :value => current_user.id) %>
+<% if @voucher.errors.any? %>
+<div id="error_explanation">
+	<h2><%= pluralize(@voucher.errors.count, (t :error)) %> forhindrede denne voucher fra at blive vist:</h2>
+	<ul>
+		<% @voucher.errors.full_messages.each do |msg| %>
+		<li><%= msg %></li>
+		<% end %>
+	</ul>
+</div>
+<% end %>
+<div class="form-group">
+	<%= f.label :partner, class: 'col-sm-2 control-label' %>
+	<div class="col-sm-10">	
+		<%#= f.number_field :partner_id, class: 'form-control' %>
+    <%= collection_select :voucher, :partner_id, (Partner.active).order(:name), :id, :name, {prompt: 'Vælg en partner'}, {class: 'form-control'} %>  
+	</div>
+</div>
+<div class="form-group">
+	<%= f.label :timesats, class: 'col-sm-2 control-label' %>
+	<div class="col-sm-10">	
+		<%= f.number_field :hourly_rate, class: 'form-control' %>
+	</div>
+</div>
+<div class="form-group">
+	<%= f.label :dato, class: 'col-sm-2 control-label' %>
+	<div class="col-sm-10">	
+		<%= f.date_select :date, class: 'form-control' %>
+	</div>
+</div>
+<div class="form-group">
+	<%= f.label :Antal, class: 'col-sm-2 control-label' %>
+	<div class="col-sm-10">	
+    <%= f.number_field :number, class: 'form-control' %>
+		<%#= f.text_field :number, class: 'form-control' %>
+	</div>
+</div>
+<div class="form-group">
+	<%= f.label :Beskrivelse, class: 'col-sm-2 control-label' %>
+	<div class="col-sm-10">	
+		<%= f.text_field :description, class: 'form-control' %>
+	</div>
+</div>
+<div class='form-group'>
+	<div class="actions col-sm-offset-2 col-sm-10">
+    <% if current_page?(action: 'new')%>
+      <%= f.submit('Opret', class: 'btn btn-info btn-xs') %>
+    <% else %>
+      <%= f.submit('Opdater', class: 'btn btn-info btn-xs') %>
+    <% end %>
+	</div>
+</div>
+<% end %>

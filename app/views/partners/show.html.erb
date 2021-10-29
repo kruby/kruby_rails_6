@@ -1,0 +1,85 @@
+<div class="container">
+	
+    <p id="notice"><%= notice %></p>
+
+        <p>
+        <strong>Name:</strong>
+        <%= @partner.name %>
+    </p>
+
+        <p>
+        <strong>Address:</strong>
+        <%= @partner.address %>
+    </p>
+
+        <p>
+        <strong>Postno:</strong>
+        <%= @partner.postno %>
+    </p>
+
+        <p>
+        <strong>City:</strong>
+        <%= @partner.city %>
+    </p>
+
+        <p>
+        <strong>Log:</strong>
+        <%= @partner.log %>
+    </p>
+
+        <p>
+        <strong>Category:</strong>
+        <%= @partner.category %>
+    </p>
+
+        <p>
+        <strong>Responsible:</strong>
+        <%= @partner.responsible %>
+    </p>
+
+        <p>
+        <strong>Info:</strong>
+        <%= @partner.info %>
+    </p>
+
+        <p>
+        <strong>Next action:</strong>
+        <%= @partner.next_action %>
+    </p>
+
+        <p>
+        <strong>Lock version:</strong>
+        <%= @partner.lock_version %>
+    </p>
+
+        <p>
+        <strong>User:</strong>
+        <%= @partner.user_id %>
+    </p>
+
+        <p>
+        <strong>Search lock:</strong>
+        <%= @partner.search_lock %>
+    </p>
+
+        <p>
+        <strong>Phone:</strong>
+        <%= @partner.phone %>
+    </p>
+
+        <p>
+        <strong>Email:</strong>
+        <%= @partner.email %>
+    </p>
+
+        <p>
+        <strong>Homepage:</strong>
+        <%= @partner.homepage %>
+    </p>
+
+    
+    <div class="btn-group">
+        <%= link_to 'Ret', edit_partner_path(@partner), class: 'btn btn-default btn-xs'%>
+        <%= link_to 'Tilbage', partners_path, class: 'btn btn-default btn-xs' %>
+    </div>
+</div>

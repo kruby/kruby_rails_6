@@ -1,0 +1,43 @@
+<div class="container">
+
+	<h1>Viser attachments</h1>
+	<div class="table-responsive">
+		<table class="table table-striped table-hover">
+			<thead>
+				<tr>
+					<th class="visible-lg">Attachable type</th>
+					<th class="visible-lg">Attachable</th>
+					<th class="visible-lg">Description</th>
+					<th class="visible-lg">Image size</th>
+					<th class="visible-lg">Position</th>
+					<th class="visible-lg">Asset</th>
+					<th colspan="3"></th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<% @attachments.each do |attachment| %>
+					<tr>
+						<td class="visible-lg"><%= attachment.attachable_type %></td>
+						<td class="visible-lg"><%= attachment.attachable_id %></td>
+						<td class="visible-lg"><%= attachment.description %></td>
+						<td class="visible-lg"><%= attachment.image_size %></td>
+						<td class="visible-lg"><%= attachment.position %></td>
+						<td class="visible-lg"><%= attachment.asset_id %></td>
+						<td colspan="3" class="right">
+							<div class="btn-group">
+								<%= link_to 'Vis', attachment, class: 'btn btn-default btn-xs' %>
+								<%= link_to 'Ret', edit_attachment_path(attachment), class: 'btn btn-default btn-xs' %>
+								<%= link_to 'Slet', attachment, method: :delete, data: { confirm: 'Er du sikker?' }, class: 'btn btn-default btn-xs' %>
+							</div>
+						</td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+	<br>
+	
+	<%= link_to 'Ny Attachment', new_attachment_path %>
+
+</div>

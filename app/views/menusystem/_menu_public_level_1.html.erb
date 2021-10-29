@@ -1,0 +1,26 @@
+<% @public_menu.each do |level_1| -%>
+<% @no_route = 'No route ' + level_1.navlabel %>
+  <% if level_1.children.count > 0 %>
+     <% @data_toggle = 'dropdown' %>
+     <% @class = 'dropdown-toggle' %>
+     <% @caret = "&nbsp;<b class='caret'></b>" %>
+  <% else %>
+     <% @data_toggle = "none" %>
+     <% @class = "none" %>
+     <% @caret = "" %>
+  <% end %>
+  <li class="dropdown">
+	<% if level_1.redirect? %>
+	  <%= link_to(raw(level_1.navlabel + @caret), '/'+ level_1.controller_redirect.to_s + '/' + level_1.action_redirect.to_s, class: @class, data: {toggle: @data_toggle}) rescue link_to @no_route.html_safe %>
+	<% else %>
+		<% if level_1.controller_name == 'Forside'%>
+		<%= link_to(raw(level_1.controller_name.mb_chars.capitalize + @caret), root_url, class: @class, data: {toggle: @data_toggle}) %>
+		<% else %>
+		<%= link_to(raw(level_1.navlabel + @caret), '/'+ level_1.controller_name.to_s, class: @class, data: {toggle: @data_toggle}) rescue link_to @no_route.html_safe %>
+		<% end %>
+	<% end %>
+  <% if level_1.children.count > 0 %>
+    <%= render :partial => "menusystem/menu_public_level_2", :locals => {:level_1 => level_1} %>
+  <% end %>
+</li>
+<% end %>

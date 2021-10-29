@@ -1,0 +1,35 @@
+<div class="container">
+	
+    <p id="notice"><%= notice %></p>
+
+        <p>
+        <strong>Description:</strong>
+        <%= @hour.description %>
+    </p>
+
+        <p>
+        <strong>Number:</strong>
+        <%= @hour.number %>
+    </p>
+
+        <p>
+        <strong>Date:</strong>
+        <%= @hour.date %>
+    </p>
+
+        <p>
+        <strong>User:</strong>
+        <%= @hour.user_id %>
+    </p>
+
+        <p>
+        <strong>Relation:</strong>
+        <%= @hour.partner_id %>
+    </p>
+
+    
+    <div class="btn-group">
+        <%= link_to 'Ret', edit_hour_path(@hour), class: 'btn btn-default btn-xs'%>
+        <%= link_to 'Tilbage', hours_path, class: 'btn btn-default btn-xs' %>
+    </div>
+</div>

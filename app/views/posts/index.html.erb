@@ -1,0 +1,74 @@
+<div class="container">
+	<h2>
+		Viser <%= t :posts %>
+		<div class="btn-group index">
+			<%= link_to 'Nyt indlæg', new_post_path, class: 'btn btn-default btn-xs' %>
+      <%= link_to 'Find alle', posts_path, class: 'btn btn-default btn-xs' %>
+		</div>
+	</h2>
+  
+	<div class="row">
+		<div class="col-lg-4">
+			<%= search_form_for @q do |f| %>
+			<%= f.label :title_cont, "Titel indeholder" %>
+			<div class="input-group">
+				<%= f.text_field :title_cont, size: 16, class: 'form-control' %>
+				<span class="input-group-btn">
+					<%= f.submit "Søg", :class => 'btn btn-default'  %>
+				</span>
+			</div>
+		</div>
+		<div class="col-lg-4">
+			<%= f.label :body_cont, "Beskrivelse indeholder" %>
+			<div class="input-group">
+				<%= f.text_field :body_cont, size: 16, class: 'form-control' %>
+				<span class="input-group-btn">
+					<%= f.submit "Søg", :class => 'btn btn-default'  %>
+				</span>
+			</div>
+			<% end %>
+		</div>
+	</div>	
+  
+	<div class="table-responsive">
+		<table class="table table-striped table-hover">
+			<thead>
+				<tr>
+					<th><%= sort_link(@q, :title, "Titel") %></th>
+					<th class="visible-lg visible-md visible-sm">Indhold</th>
+					<th class="text-center visible-lg visible-md visible-sm">Forfatter</th>
+					<th class="text-center visible-lg visible-md visible-sm"><%= sort_link(@q, :updated_at, "Ændret") %></th>
+					<th class="text-center visible-lg visible-md visible-sm">Position</th>
+					<th class="text-center">Aktiv</th>
+					<th colspan="3"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @posts.each do |post| %>
+					<tr>
+						<td><%= truncate(post.title, length: 20) %></td>
+						<td class="visible-lg visible-md visible-sm"><%= truncate(post.body, length: 30) %></td>
+						<td class="text-center visible-lg visible-md visible-sm"><%= User.find(post.user_id).blogname rescue nil %></td>
+						<td class="text-center visible-lg visible-md visible-sm"><%= nice_timestamp(post.updated_at) %></td>
+						<td class="text-center visible-lg visible-md visible-sm"><%= post.position %></td>
+						<td class="text-center">
+							<% if post.active == true %>
+								<%= link_to('+', post_active_path(post.id), {class: 'btn btn-xs btn-default activated'}) %>
+								<%#= link_to post.active == true ? '√' : '–', post_active_path(post.id) %>
+							<% else %>
+								<%= link_to('-', post_active_path(post.id), {class: 'btn btn-xs btn-default passified'}) %>
+							<% end %>
+						</td>
+						<td colspan="3" class="text-right">
+							<div class="btn-group">
+								<%#= link_to 'Vis', post, class: 'btn btn-default btn-xs' %>
+								<%= link_to 'Ret', edit_post_path(post), class: 'btn btn-default btn-xs' %>
+								<%= link_to 'Slet', post, method: :delete, data: { confirm: 'Er du sikker?' }, class: 'btn btn-default btn-xs' %>
+							</div>
+						</td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+</div>

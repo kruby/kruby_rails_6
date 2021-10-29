@@ -1,0 +1,19 @@
+<div class="jumbotron">
+    <div class="container">
+        <h2>Velkommen til Kruby <input type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target="#toggleText" value="Vis mere"></h2>
+        <div id="toggleText" class="collapse">
+            <p class="small">
+                <%= @page.body %><br>
+                <% @posts.each do |p| %>
+                    <%= p.title + " - " + p.id.to_s %><br>
+                <% end%>
+            </p>
+        </div>
+        
+        <iframe src="https://kruby.dk/" width="100%" height="1000px" id="rails_iframe">error!</iframe>
+        
+        
+
+        
+    </div>
+</div>

@@ -1,0 +1,25 @@
+<div class="container">
+	
+    <p id="notice"><%= notice %></p>
+
+        <p>
+        <strong>Name:</strong>
+        <%= @preference.name %>
+    </p>
+
+        <p>
+        <strong>Value:</strong>
+        <%= @preference.value %>
+    </p>
+
+        <p>
+        <strong>User:</strong>
+        <%= @preference.user_id %>
+    </p>
+
+    
+    <div class="btn-group">
+        <%= link_to 'Ret', edit_preference_path(@preference), class: 'btn btn-default btn-xs'%>
+        <%= link_to 'Tilbage', preferences_path, class: 'btn btn-default btn-xs' %>
+    </div>
+</div>

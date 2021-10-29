@@ -1,0 +1,13 @@
+<tr class="row-fluid">
+	<td colspan=6 class="text-left hour">
+		<%= hour.description %>
+	</td>
+	<td colspan=1 class='text-center'><%= number_with_delimiter(hour.number, locale: :da) %></td>
+	<td colspan=1 class='text-right'><span class="hour_date"><%= nice_date(hour.date) rescue nil %></span></td>
+	<td colspan=3 class="text-right">
+		<div class="btn-group">
+			<%= link_to 'Ret', edit_hour_path(hour), class: 'btn btn-default btn-xs' %>
+			<%= link_to 'Slet', hour, method: :delete, data: { confirm: 'Er du sikker?' }, class: 'btn btn-default btn-xs' %>
+		</div>
+	</td>
+</tr>

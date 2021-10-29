@@ -1,0 +1,8 @@
+<div class="container">
+		<%= form_tag(sessions_path, class: 'form-signin') do %>
+		<h2 class="form-signin-heading">Du bedes logge ind</h2>
+		<%= text_field_tag(:email, params[:email], placeholder: 'Email', class: 'form-control') %><br>
+		<%= password_field_tag(:password, '', placeholder: 'Password', class: 'form-control')%><br>
+		<%= submit_tag 'Log ind', class: 'btn btn-lg btn-primary btn-block'%>
+		<% end %>
+</div>

@@ -1,0 +1,35 @@
+<nav class="navbar navbar-inverse" role="navigation">
+  <div class="navbar-header">
+    <%= render :partial => "viewer/partials/social_links_small_format.html.erb" %>
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class ="nav navbar-nav">
+      <%= render :partial => "menusystem/menu_public_level_1" %>
+    </ul>
+    <% if current_user %>
+    <ul class="nav navbar-nav navbar-right">
+      <!-- <li><%#= link_to 'Login', login_path %><a href="#">Login</a></li> -->
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admininstration <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <% if current_user.category == 'Admin' %>
+          <%= render :partial => "menusystem/menu_system_level_0" %>
+          <li>
+            <%= link_to(Rails::VERSION::STRING + ' - ' + RUBY_VERSION, 'http://guides.rubyonrails.org/')%>
+          </li>
+          <% end %>
+          <li>
+            <%= link_to( 'Logoff', '/logoff')%>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <% end%>
+  </div>
+</nav>

@@ -1,0 +1,161 @@
+<%= form_for(@partner, html: {class: 'form-horizontal', role: 'form'}) do |f| %>
+<% if @partner.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(@partner.errors.count, (t :error)) %> forhindrede denne partner fra at blive vist:</h2>
+  <ul>
+    <% @partner.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+<div class="form-group">
+  <%= f.label :navn, class: 'col-sm-2 control-label' %>
+  <div class="col-sm-10">	
+    <div class="input-group">
+      <span class="input-group-addon">
+        <%= f.check_box :active, type: 'checkbox' %>
+      </span>
+    <%= f.text_field :name, class: 'form-control' %>
+    </div>
+  </div>
+</div>
+<div class="form-group">
+  <%= f.label :adresse, class: 'col-sm-2 control-label' %>
+  <div class="col-sm-10">	
+    <%= f.text_field :address, class: 'form-control' %>
+  </div>
+</div>
+<div class="form-group">
+  <%= f.label :postnr, class: 'col-sm-2 control-label' %>
+  <div class="col-sm-10">	
+    <%= f.text_field :postno, class: 'form-control' %>
+  </div>
+</div>
+<div class="form-group">
+  <%= f.label :by, class: 'col-sm-2 control-label' %>
+  <div class="col-sm-10">	
+    <%= f.text_field :city, class: 'form-control' %>
+  </div>
+</div>
+<div class="form-group">
+  <%= f.label :telefon, class: 'col-sm-2 control-label' %>
+  <div class="col-sm-10">	
+    <%= f.text_field :phone, class: 'form-control' %>
+  </div>
+</div>
+<div class="form-group">
+  <%= f.label :email, class: 'col-sm-2 control-label' %>
+  <div class="col-sm-10">	
+    <%= f.text_field :email, class: 'form-control' %>
+  </div>
+</div>
+<div class="form-group">
+  <%= f.label :hjemmeside, class: 'col-sm-2 control-label' %>
+  <div class="col-sm-10">	
+    <%= f.text_field :homepage, class: 'form-control' %>
+  </div>
+</div>
+<div class="form-group">
+  <%= f.label :kategori, class: 'col-sm-2 control-label' %>
+  <div class="col-sm-10">	
+    <%= f.select(:category, ['Kunde', 'Emne', 'Kontakt', 'Leverandør', 'X-kunde', 'ProBook emne', 'ProBook kunde'], {:include_blank => true}, {class: 'form-control'}) %>
+  </div>
+</div>
+<div class="form-group">
+  <%= f.label :ansvarlig, class: 'col-sm-2 control-label' %>
+  <div class="col-sm-10">
+    <%= f.select(:responsible, ['TKS', 'ALLE'], {}, {class: 'form-control'}) %>
+  </div>
+</div>
+<div class="form-group">
+  <%= f.label :status, class: 'col-sm-2 control-label' %>
+  <div class="col-sm-10">
+    <%= f.text_field :status, class: 'form-control' %>
+  </div>
+</div>
+<div class="form-group">
+  <%= f.label :log, class: 'col-sm-2 control-label' %>
+  <div class="col-sm-10">	
+    <%= f.text_area :log, class: 'form-control', rows: 6 %>
+  </div>
+</div>
+<div class="form-group">
+  <%= f.label :info, class: 'col-sm-2 control-label' %>
+  <div class="col-sm-10">	
+    <%= f.text_area :info, class: 'form-control', rows: 3 %>
+  </div>
+</div>
+
+<% if @partner.vouchers.count > 0 %>
+  <div class="form-group">
+    <%= f.label :adgang_klippekort, class: 'col-sm-2 control-label' %>
+    <div class="col-sm-10">	
+      <%= collection_select :partner, :user_id, User.all, :id, :name, {prompt: 'Vælg en bruger', include_blank: true}, {class: 'form-control'} %>
+    </div>
+  </div>
+<% end %>
+<div class="form-group send_til_kalender">
+    <div class="col-sm-offset-2">	    
+        <div class="checkbox ics_checkbox_partner">
+            <%= f.label :send_til_kalender %>
+            <%= f.check_box :ics_email, type: 'checkbox' %>
+        </div>
+    </div>
+</div>
+<div class="form-group">
+  <%= f.label :næste_kontakt, class: 'col-sm-2 control-label' %>
+  <div class="col-sm-10 next_action_partner">	
+    <%= f.datetime_select :next_action, class: 'form-control' %>
+    <%#= link_to('Email aftale', send_ics_event_path(@partner.id), class: 'btn btn-default btn-xs') %>
+  </div>
+</div>
+<div class="form-group ics_varighed_alarm">
+    <div class="col-sm-offset-2 col-sm-2 ics_varighed">	            
+        <div class="input-group">
+            <span class="input-group-addon"><%= f.label :varighed %></span>
+            <%= f.select(:ics_duration, [['5 min.', '5'], ['10 min.', '10'], ['15 min.', '15'], ['30 min.', '30'], ['45 min.', '45'], ['1 time', '60'], ['2 timer', '120'], ['3 timer', '180'], ['4 timer', '240']], {:include_blank => true}, {class: 'form-control'}) %>
+        </div>
+    </div>
+    <div class="col-sm-2 ics_alarm">	            
+        <div class="input-group">
+            <span class="input-group-addon"><%= f.label :alarm %></span>
+            <%= f.select(:ics_alarm, [['5 min.', '-PT5M'], ['10 min.', '-PT10M'], ['15 min.', '-PT15M'], ['30 min.', '-PT30M'], ['1 time', '-PT1H'], ['2 timer', '-PT2H'], ['3 timer', '-PT3H'], ['4 timer', '-PT4H']], {:include_blank => true}, {class: 'form-control'}) %>
+        </div>
+    </div>
+</div>
+<div class="form-group">
+  <%= f.label :noter, class: 'col-sm-2 control-label' %>
+  <div class="col-sm-10 next_action_partner">	
+    <%= f.text_field :ics_notes, class: 'form-control' %>
+  </div>
+</div>
+<div class='form-group'>
+  <div class="actions col-sm-offset-2 col-sm-10">
+    <% if current_page?(action: 'new')%>
+    <%= f.submit('Opret', class: 'btn btn-info btn-xs') %>
+    <% else %>
+    <%= f.submit('Opdater', class: 'btn btn-info btn-xs') %>
+    <% end %>
+  </div>
+</div>
+
+<% if @partner.contacts.count > 0 %>
+  <%= render :template => "contacts/index", locals: {contacts: @partner.contacts} %>
+<% else %>
+  <% unless current_page?(action: 'new')%>
+    <div class="form-group">
+      <%= f.label :kontakter, class: 'col-sm-2 control-label' %>
+      <div class="col-sm-10 partner_contacts">	
+          <p>Her kan du tilknytte kontakter til din partner.</p>
+        <div class="btn-group">
+          <%= link_to 'Opret ny kontakt', new_partner_contact_path(@partner.id), class: 'btn btn-default btn-xs' %>
+        </div>
+      </div>
+    </div>
+ <% end %>
+<% end %>
+
+
+<% end %>

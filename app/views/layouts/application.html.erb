@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= content_for?(:title) ? yield(:title) : "Kruby" %></title>
+  <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Kruby" %>">
+  <link href="/assets/mini.gif" rel="shortcut icon"/>
+  <%= stylesheet_link_tag "application", media: "all" %>
+  <%#= javascript_include_tag "application" %>
+  <script src="https://cdn.ckeditor.com/5.1.0/standard/ckeditor.js"></script>
+  <%#= javascript_include_tag "Ckeditor.cdn_url" %>
+  <%#= javascript_include_tag "ckeditor/config" %>
+  <%= csrf_meta_tags %>
+  <%= favicon_link_tag 'favicon.ico' %>
+  <%#= google_font_link_tag 'Ubuntu:400,500,700'%>
+  <%#= google_font_link_tag 'Open+Sans:400,600,800'%>
+  <%#= google_font_link_tag 'Fontdiner+Swanky'%>
+  <%#= google_font_link_tag 'Just+Me+Again+Down+Here'%>
+  <%= render :partial => "viewer/partials/social_links_large_format.html.erb" %>
+  <%#= google_font_link_tag 'Oswald:300,400,700,'%>
+  <%#= google_font_link_tag 'Roboto:400,400italic,500,500italic,700,700italic,900,900italic,'%>
+  <%#= google_font_link_tag 'Open+Sans+Condensed:700|Open+Sans:600,400,300'%>
+</head>
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-20355035-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-20355035-1');
+</script>
+<!-- <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-20355035-1', 'auto');
+ga('send', 'pageview');
+</script> -->
+<!-- End Google Analytics -->
+
+<% if Rails.env.to_s  == 'development' %>
+  <%= debug(params) %>
+  <%= Rails.env.to_s %>
+  <%= Rails::VERSION::STRING + ' - ' + RUBY_VERSION %><br>
+  <%= I18n.locale %><br>
+<% end %>
+
+<body class="backend">
+  <header>
+    <%= image_tag "kruby_logo_top.png", :class => 'img-responsive', :alt => 'Kruby' %>		
+    <%= render 'menusystem/navigation' %>
+  </header>
+  <main role="main">
+    <%= render 'layouts/partials/messages' %>
+    <%= yield %>
+    <%= yield :javascript %>
+  </main>
+</body>
+</html>

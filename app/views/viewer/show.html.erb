@@ -1,0 +1,27 @@
+<!-- Vi opdeler med content_for så vi kan styre hvad der bliver indsat hvor i viewer.html.erb under layouts -->
+<% content_for :head do %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= content_for?(:title) ? yield(:title) : "Kruby on Rails 4 and Ruby 2" %></title>
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Kruby on Rails 4 and Ruby 2" %>">
+	<link href="/assets/mini.gif" rel="shortcut icon"/>
+    <%= stylesheet_link_tag "application", media: "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+    <%= favicon_link_tag 'favicon.ico' %>
+<% end%>
+
+<% content_for :body do %>
+	<header>
+		<%= image_tag "kruby_logo_top.png", class: 'img-responsive', alt: 'Responsive image' %>
+		<%= render 'menusystem/navigation' %>
+	</header>
+	<main role="main">
+	   <%= render 'viewer/partials/messages' %>
+	</main>
+	<div class="container">
+		<%= render 'viewer/partials/posts'%>
+	</div>
+	<div class="facebook">
+    <!--Facebook Page code goes here -->
+	</div>
+<% end %>

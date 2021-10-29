@@ -1,0 +1,64 @@
+<div class="panel-group" id="accordion">
+  <% @counter = 0 %>
+  <% if current_user and current_user.category == "Admin" %>
+  <div id='sort_posts' data-update-url="<%= sort_posts_url %>">
+    <% else %>
+    <div id='no_sort_posts'>
+      <% end %>
+      <% for post in @posts %>
+      <%= content_tag_for :div, post do %>
+      <% @counter = @counter + 1 %>
+      <div class="panel panel-default blog_posts">
+        <div class="panel-heading">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse_<%=@counter%>" class="link_forside">
+            <% if current_user and current_user.category == "Admin" %>
+            <p class="date_and_author text-muted visible-sm visible-md visible-lg">
+              <%= post.created_at.strftime("%d.%m.%y - %H:%M") %> - <%= User.find(post.user_id).blogname rescue 'Kruby' %>
+            </p>
+            <% end %>
+            <h2 class="forside-header"><%= raw post.title %></h2>
+            <% if post.attachments.count > 0 %>
+            <div class="attachments">
+              <% if current_user and current_user.category == "Admin" %>
+              <ul id='sort_attachments_<%=@counter%>' data-update-url="<%= sort_attachments_url %>">
+                <% else %>
+                <ul id='no_sort_attachments'>
+                  <% end %>
+                  <% post.attachments.order('position').each do |attachment| %>
+                  <% @group = 'group'+post.id.to_s %>
+                  <% @caption = Asset.find(attachment.asset_id).caption rescue nil %>
+                  <% @description = Asset.find(attachment.asset_id).description rescue nil %>
+                  <% @image = Asset.find(attachment.asset_id).photo.url(:thumb) rescue nil %>
+                  <% @image_show = Asset.find(attachment.asset_id).photo.url(:original) rescue nil %>
+                  <%= content_tag_for :li, attachment do %>
+                  <%= link_to image_tag(@image, {class: 'img-thumbnail forside-img', alt: @caption}), @image_show, {class: 'fancybox-button', rel: @group, title: @description} %>
+                  <% end %>
+                  <% end %>
+                </ul>
+              </div>	
+              <% end %>
+            </a>
+          </div>
+          <div id="collapse_<%=@counter%>" class="panel-collapse collapse">
+            <div class="panel-body">
+              <p class="date_and_author_grey">
+                <%= post.created_at.strftime("%d.%m.%y - %H:%M") %> - <%= User.find(post.user_id).blogname rescue 'Kruby' %>
+              </p>
+              <%= raw post.body %>
+            </div>
+          </div>
+        </div>
+        <% end%>	
+        <% end%>	
+      </div>
+    </div>
+
+    <% content_for :javascript do %>
+
+    <script>
+    $(document).ready(function() {
+      $("a.fancybox-button").fancybox();
+    });
+    </script>
+    
+    <% end %>

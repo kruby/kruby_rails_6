@@ -1,0 +1,30 @@
+<% @level_2 = level_1.children %>
+
+<% unless @level_2.nil? %>
+	
+  <ul class="dropdown-menu">
+
+    <% @level_2.each do |level_2| -%>
+    <% @no_route = 'No route ' + level_2.navlabel %>
+
+    <% if level_2.children.count > 0 %>
+      <li class="dropdown-submenu"> 
+    <% else %>
+      <li>
+    <% end %>
+    <% if level_2.redirect? %>
+    <%= link_to(level_2.navlabel, '/'+ level_2.controller_redirect.to_s + '/' + level_2.action_redirect.to_s) rescue link_to @no_route.html_safe %>
+    <% else %>
+    <%= link_to(level_2.navlabel, '/'+ level_2.controller_name.to_s) rescue link_to @no_route.html_safe %>
+    <% end %>
+    <% if level_2.children.count > 0 %>
+    <%= render :partial => "menusystem/menu_system_level_3", :locals => {:level_2 => level_2} %>
+    <% end %>
+
+    <% end %>
+
+  </ul>
+
+<% end %>	
+
+</li>

@@ -1,0 +1,24 @@
+<% @level_2_main = level_1.children %>
+<% unless @level_2_main.nil? %>
+	<% @level_2_main.each do |level_2| -%>
+	<% @no_route = 'No route ' + level_2.navlabel %>
+		<ul class="dropdown-menu">
+      <% if level_2.children.count > 0 %>
+         <li class="dropdown-submenu"> 
+      <% else %>
+         <li>
+      <% end %>
+				<% if level_2.redirect? %>
+						<%= link_to(level_2.navlabel, '/'+ level_2.controller_redirect.to_s + '/' + level_2.action_redirect.to_s) rescue link_to @no_route.html_safe %>
+				<% else %>
+					<% if level_2.controller_name == 'forside'%>
+						<li><%= link_to level_2.controller_name.mb_chars.capitalize, root_url %>
+					<% else %>
+						<%= link_to(level_2.navlabel, '/'+ level_2.controller_name.to_s) rescue link_to @no_route.html_safe %>
+					<% end %>
+				<% end %>
+			<%= render :partial => "menusystem/menu_public_level_3", :locals => {:level_2 => level_2} %>
+		</ul>
+	<% end %>
+<% end %>
+</li>

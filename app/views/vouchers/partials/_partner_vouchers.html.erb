@@ -1,0 +1,46 @@
+<div class="container">
+	<h2>
+		Klippekort
+	</h2>
+  
+  <div class="btn-group">
+    <%= link_to 'Se partners klippekort', partner_vouchers_path, class: 'btn btn-default btn-xs' %>
+    <%= link_to 'Opret nyt klippekort', new_partner_voucher_path(@partner.id), class: 'btn btn-default btn-xs' %>
+  </div>
+  
+	<div class="table-responsive">
+		<table class="table table-striped table-hover">
+			<thead>
+				<tr>
+					<th class="text-right">Timer</th>
+					<th class="visible-lg visible-md visible-sm text-center">Dato</th>
+          <th class="visible-lg visible-md visible-sm text-left">Tekst</th>
+					<th class="visible-lg visible-md visible-sm">Ansvarlig</th>
+					<th class="text-center">Sats</th>
+					<th colspan="3"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<% partner.vouchers.limit(10).order(date: :desc).order(created_at: :desc).each do |voucher| %>
+					<tr>
+						<td class="text-right"><%= number_with_delimiter(voucher.number, locale: :da) %></td>
+						<td class="visible-lg visible-md visible-sm text-center"><%= nice_date(voucher.date) %></td>
+						<td class="visible-lg visible-md visible-sm text-left"><%= voucher.description %></td>
+						<td class="visible-lg visible-md visible-sm">
+							<% @user_id = Partner.find(voucher.partner_id).user_id %>
+							<%= User.find(@user_id.to_i).name rescue nil %>
+						</td>
+						<td class="text-center"><%= number_with_precision(voucher.hourly_rate, locale: :da, precision: 2) %></td>
+						<td colspan="3" class="right">
+							<div class="btn-group">
+								<%#= link_to 'Vis', voucher, class: 'btn btn-default btn-xs' %>
+								<%= link_to 'Ret', edit_voucher_path(voucher), class: 'btn btn-default btn-xs' %>
+								<%= link_to 'Slet', voucher, method: :delete, data: { confirm: 'Er du sikker?' }, class: 'btn btn-default btn-xs'%>
+							</div>
+						</td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+</div>

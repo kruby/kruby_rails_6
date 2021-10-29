@@ -1,0 +1,16 @@
+<% @hours_total_year = partner.hours.yearly_hours(year).sum(:number) rescue nil %>
+<% @average_hourly_rate = Voucher.average_hourly_rate_partner_year(partner, year) rescue nil %>
+<% if @hours_total_year > 0 %>
+  <% @link_text = year.to_s + ' - I alt ' + delimiter(@hours_total_year) + ' timer til ' + delimiter(@average_hourly_rate) + ' kr. pr. time' rescue nil %>	
+  <tr class="row-fluid">
+  	<td colspan="12" class="text-left year">
+  		<%= link_to @link_text, show_months_path(partner_id: params[:partner_id], year: year, q: params[:q]) %>
+  	</td>
+  </tr>
+
+  <% if partner.id.to_s == params[:partner_id] and params[:year] == year.to_s %>
+  	<% for month_date in @month_dates %>
+  		<%= render partial: "partners/partials/months_specified", locals: {partner: partner, year: year, month_date: month_date} %>
+  	<% end %>
+  <% end %>
+<% end %>

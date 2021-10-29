@@ -1,0 +1,85 @@
+<%= form_for(@content, html: {class: 'form-horizontal', role: 'form'}) do |f| %>
+<% if @content.errors.any? %>
+<div id="error_explanation">
+    <h2><%= pluralize(@content.errors.count, (t :error)) %> prohibited this content from being saved:</h2>
+
+    <ul>
+        <% @content.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+        <% end %>
+    </ul>
+</div>
+<% end %>
+
+<div class="form-group">
+    <div class="col-sm-offset-2 col-sm-2">	            
+        <div class="input-group">
+            <span class="input-group-addon"><%= f.label :position %></span>
+            <%= f.number_field :position, class: 'form-control' %>
+        </div>
+    </div>
+    <div class="col-sm-2">	    
+        <div class="checkbox">
+            <%= f.label :active %>
+            <%= f.check_box :active, type: 'checkbox' %>
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    <%= f.label :category, class: 'col-sm-2 control-label'  %>
+    <div class="col-sm-2">	
+        <%= f.select(:category, ['User', 'Editor', 'Public', 'Admin'], {}, {class: 'form-control'}) %>
+    </div>
+</div>
+<div class="form-group">
+    <%= f.label :resource_type, class: 'col-sm-2 control-label'  %>
+    <div class="col-sm-8">	
+        <%= f.text_field :resource_type, class: 'form-control' %>
+    </div>
+</div>
+<div class="form-group">
+    <%= f.label :controller_name, class: 'col-sm-2 control-label'  %>
+    <div class="col-sm-8">	
+        <%= f.text_field :controller_name, class: 'form-control' %>
+    </div>
+</div>
+<div class="form-group">
+    <%= f.label :navlabel, class: 'col-sm-2 control-label'  %>
+    <div class="col-sm-8">	
+        <%= f.text_field :navlabel, class: 'form-control' %>
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-sm-offset-2 col-sm-6">	            
+        <div class="input-group">
+            <span class="input-group-addon"><%= f.label :controller_redirect %></span>
+            <%= f.text_field :controller_redirect, class: 'form-control' %>
+        </div>
+    </div>
+    <div class="col-sm-2">	    
+        <div class="checkbox">
+            <%= f.label :redirect %>
+            <%= f.check_box :redirect, type: 'checkbox' %>
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-sm-offset-2 col-sm-6">	            
+        <div class="input-group">
+            <span class="input-group-addon"><%= f.label :action_redirect %></span>
+            <%= f.text_field :action_redirect, class: 'form-control' %>
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    <%= f.label :parent_id, class: 'col-sm-2 control-label'  %>
+    <div class="col-sm-2">	
+        <%= collection_select :content, :parent_id, (Content.menus_and_pages).order('position'), :id, :navlabel_and_id, {prompt: 'Vælg forældremenu', include_blank: 'Ingen'}, {class: 'form-control'} %>
+    </div>
+</div>
+<div class='form-group'>
+    <div class="actions col-sm-offset-2 col-sm-8">
+        <%= f.submit('Opdater', class: 'btn btn-info btn-xs') %>
+    </div>
+</div>
+<% end %>

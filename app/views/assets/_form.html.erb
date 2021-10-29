@@ -1,0 +1,90 @@
+<%= form_for(@asset, html: {class: 'form-horizontal', role: 'form', multipart: true}) do |f| %>
+<%= f.hidden_field(:user_id, value: current_user.id) %>
+
+<% if @asset.errors.any? %>
+<div id="error_explanation">
+	<h2><%= pluralize(@asset.errors.count, (t :error)) %> forhindrede denne asset fra at blive vist:</h2>
+	<ul>
+		<% @asset.errors.full_messages.each do |msg| %>
+		<li><%= msg %></li>
+		<% end %>
+	</ul>
+</div>
+<% end %>
+<% unless @asset.photo.url(:thumb).include?('missing.png') %>
+  <div class="form-group">
+    <%= f.label :foto, class: 'col-sm-2 control-label' %>
+  	<div class="col-sm-10">	
+      <% @thumb = @asset.photo.url(:thumb) rescue nil %>
+      <% @caption = @asset.caption rescue nil %>
+      <% @image_show = @asset.photo.url(:original)%>
+  		<%= link_to image_tag(@thumb,{class: 'img-thumbnail', width: '30px' }), @image_show, {class: 'fancybox-button', rel: 'gallery', title: @title}%>
+  	</div>
+  </div>
+<% end %>
+
+<div class="form-group">
+	<%= f.label :upload, class: 'col-sm-2 control-label' %>
+	<div class="col-sm-10">	
+		<%= f.file_field :photo, title: 'Find filen der skal uploades', class: 'btn-success btn' %>
+	</div>
+</div>
+
+<div class="form-group">
+	<%= f.label :overskrift, class: 'col-sm-2 control-label' %>
+	<div class="col-sm-10">	
+		<%= f.text_field :caption, class: 'form-control' %>
+	</div>
+</div>
+
+<div class="form-group">
+	<%= f.label :beskrivelse, class: 'col-sm-2 control-label' %>
+	<div class="col-sm-10">	
+		<%= f.text_field :description, class: 'form-control' %>
+	</div>
+</div>
+
+<!-- <div class="form-group">
+	<%= f.label :user_id, class: 'col-sm-2 control-label' %>
+	<div class="col-sm-10">	
+		<%= f.number_field :user_id, class: 'form-control' %>
+	</div>
+</div> -->
+<!-- <div class="form-group">
+	<%= f.label :photo_file_name, class: 'col-sm-2 control-label' %>
+	<div class="col-sm-10">	
+		<%= f.text_field :photo_file_name, class: 'form-control' %>
+	</div>
+</div> -->
+<!-- <div class="form-group">
+	<%= f.label :photo_content_type, class: 'col-sm-2 control-label' %>
+	<div class="col-sm-10">	
+		<%= f.text_field :photo_content_type, class: 'form-control' %>
+	</div>
+</div> -->
+<!-- <div class="form-group">
+	<%= f.label :photo_file_size, class: 'col-sm-2 control-label' %>
+	<div class="col-sm-10">	
+		<%= f.number_field :photo_file_size, class: 'form-control' %>
+	</div>
+</div> -->
+<!-- <div class="form-group">
+	<%= f.label :photo_updated_at, class: 'col-sm-2 control-label' %>
+	<div class="col-sm-10">	
+		<%= f.datetime_select :photo_updated_at, class: 'form-control' %>
+	</div>
+</div> -->
+
+<div class='form-group'>
+	<div class="actions col-sm-offset-2 col-sm-10">
+		<%= f.submit('Opdater', class: 'btn btn-info btn-xs') %>
+	</div>
+</div>
+<% end %>
+
+<script>
+$(document).ready(function() {
+	$('input[type=file]').bootstrapFileInput();
+	$('.file-inputs').bootstrapFileInput();
+});
+</script>

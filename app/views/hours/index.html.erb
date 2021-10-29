@@ -1,0 +1,146 @@
+<div class="container">
+    <h2>Viser alle timer 
+        <div class="btn-group">
+            <%= link_to 'Ny time registrering', new_hour_path, class: 'btn btn-default btn-xs' %>
+            <%= link_to 'Find alle', hours_path, class: 'btn btn-default btn-xs' %>
+        </div>
+    </h2>	
+	
+    <div class="row">
+        <%= search_form_for @q do |f| %>
+        <div class="col-lg-4">
+            <%= f.label :partner_name_cont, "Navn indeholder" %>
+            <div class="form-group">
+                <%= f.text_field :partner_name_cont, size: 16, class: 'form-control' %>
+                <!-- <span class="input-group-btn">
+                    <%#= f.submit "Søg", :class => 'btn btn-default'  %>
+                </span> -->
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <%= f.label :description_cont, "Beskrivelse indeholder" %>
+            <div class="form-group">
+                <%= f.text_field :description_cont, size: 16, class: 'form-control' %>
+                <!-- <span class="input-group-btn">
+                    <%#= f.submit "Søg", :class => 'btn btn-default'  %>
+                </span> -->
+            </div>
+        </div>
+    </div>
+
+    <% unless params[:q] == nil %>
+        <% unless params[:q][:date_gteq] == nil %>
+            <% @value_1 = params[:q][:date_gteq] %>
+        <% end %>
+        <% unless params[:q][:date_lteq] == nil %>
+            <% @value_2 = params[:q][:date_lteq] %>
+        <% end %>
+    <% end %>
+    
+    <div class="row">
+        <div class='col-lg-4'>
+            <div class="form-group">
+                <%= f.label(:date_gteq, t('date_gteq').capitalize) %>
+                <div class='input-group date' id='datetimepicker1'>
+                    <%= f.text_field :date_gteq, class: 'form-control', value: @value_1 %>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class='col-lg-4'>
+            <div class="form-group">
+                <%= f.label(:date_lteq, t('date_lteq').capitalize) %>
+                <div class='input-group date' id='datetimepicker2'>
+                    <%= f.text_field :date_lteq, class: 'form-control', value: @value_2 %>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-2">
+            <div class="form-group">
+                <%= f.submit (t :search).capitalize, :class => 'btn btn-default search_button' %>
+            </div>
+        </div>
+        
+    </div>
+    
+    <% end %> 
+
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th class="visible-lg text-left">Af</th>
+                    <th class="text-left"><%= sort_link @q, :partner_name, 'Firma'%></th>
+                    <th class="text-left">Beskrivelse</th>
+                    <th class="text-right">Antal</th>
+                    <th class="text-center"><%= sort_link @q, :date, 'Dato'%></th>
+                    <th colspan="3"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @hours.each do |hour| %>
+                <tr>
+                    <td class="visible-lg text-left"><%= User.find(hour.user_id).blogname rescue nil %></td>
+                    <td class="text-left visible-lg visible-md"><%= truncate(Partner.find(hour.partner_id).name, length: 20) rescue nil %></td>
+                    <td class="text-left visible-sm visible-xs"><%= truncate(Partner.find(hour.partner_id).name, length: 10) rescue nil %></td>
+                    <td class="visible-lg"><%= truncate(hour.description, length: 100) %></td>
+                    <td class="visible-md visible-sm visible-xs"><%= truncate(hour.description, length: 10) %></td>
+                    <td class="text-right"><%= number_with_precision(hour.number, locale: :da) %></td>
+                    <td class="text-center visible-lg visible-md"><%= l hour.date, format: :nice %></td>
+                    <td class="text-center visible-sm visible-xs"><%= l hour.date, format: :compact %></td>
+                    <td colspan=2 class="right">
+                        <div class="btn-group">
+                            <%#= link_to 'Vis', hour, class: 'btn btn-default btn-xs' %>
+                            <%= link_to 'Ret', edit_hour_path(hour), class: 'btn btn-default btn-xs' %>
+                            <%= link_to 'Slet', hour, method: :delete, data: { confirm: 'Er du sikker?' }, class: 'btn btn-default btn-xs' %>
+                        </div>
+                    </td>
+                </tr>
+                <% end %>
+                <tr>
+                    <td colspan=4 class='text-right bold'><%= number_with_precision(@hours.sum(:number), locale: :da) rescue nil %></td>
+                    <td colspan=6 class="left"><strong>Total</strong></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+    
+    
+    
+    <script type="text/javascript">
+      $(function () {
+        $('#datetimepicker1').datetimepicker({
+          format: 'DD/MM/YYYY 00:00',    
+          calendarWeeks:true
+        });
+        $('#datetimepicker1').on('dp.change', function (e) {
+          var kk = $("#datepicker").val();
+          $("#output").html(
+            "Week Number: " + moment(kk, "DD/MM/YYYY").week() + " of " + 
+            moment(kk, "DD/MM/YYYY").weeksInYear()
+          );
+        });
+      });
+    </script>
+    <script type="text/javascript">
+      $(function () {
+        $('#datetimepicker2').datetimepicker({
+          format: 'DD/MM/YYYY 24:00',    
+          calendarWeeks:true
+        });
+        $('#datetimepicker2').on('dp.change', function (e) {
+          var kk = $("#datepicker").val();
+          $("#output").html(
+            "Week Number: " + moment(kk, "DD/MM/YYYY").week() + " of " + 
+            moment(kk, "DD/MM/YYYY").weeksInYear()
+          );
+        });
+      });
+    </script>

@@ -1,0 +1,63 @@
+<div class="container">
+	<h2>
+		Viser alle klippekort
+		<div class="btn-group index">
+			<%= link_to 'Nyt klippekort', new_voucher_path, class: 'btn btn-default btn-xs' %>
+      <%= link_to 'Find alle', vouchers_path, class: 'btn btn-default btn-xs' %>
+      <%= link_to 'Se alle klip', all_partner_hours_path, class: 'btn btn-default btn-xs' %>
+		</div>
+	</h2>
+	<div class="row">
+		<div class="col-lg-4">
+			<%= search_form_for @q do |f| %>
+			<%= f.label :partner_name_cont, "Navn indeholder" %>
+			<div class="input-group">
+				<%= f.text_field :partner_name_cont, size: 16, class: 'form-control' %>
+				<span class="input-group-btn">
+					<%= f.submit "Søg", :class => 'btn btn-default'  %>
+				</span>
+			</div>
+		</div>
+			<% end %>
+	</div>
+	<div class="table-responsive">
+		<table class="table table-striped table-hover">
+			<thead>
+				<tr>
+					<th class="text-right"><%= sort_link @q, :number, 'Timer'%></th>
+					<th class=""><%= sort_link @q, :partner_name, 'Partner'%></th>
+					<th class="visible-lg visible-md visible-sm text-center"><%= sort_link @q, :date, 'Dato'%></th>
+					<th class="visible-lg visible-md visible-sm text-left">Beskrivelse</th>
+					<th class="visible-lg visible-md visible-sm">Ansvarlig</th>
+					<th class="text-center">Sats</th>
+					<th colspan="3"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @vouchers.each do |voucher| %>
+					<tr>
+						<td class="text-right"><%= number_with_delimiter(voucher.number, locale: :da) %></td>
+						<td class="">
+              <%= link_to(truncate(Partner.find(voucher.partner_id).name, length: 20), partner_vouchers_path(voucher.partner_id)) %>
+              <%#= link_to(truncate(Partner.find(voucher.partner_id).name, length: 20), edit_partner_path(voucher.partner_id)) %>
+            </td>
+						<td class="visible-lg visible-md visible-sm text-center"><%= nice_date(voucher.date) %></td>
+						<td class="visible-lg visible-md visible-sm text-left"><%= voucher.description %></td>
+						<td class="visible-lg visible-md visible-sm">
+							<% @user_id = Partner.find(voucher.partner_id).user_id %>
+							<%= User.find(@user_id.to_i).name rescue nil %>
+						</td>
+						<td class="text-center"><%= number_with_precision(voucher.hourly_rate, locale: :da, precision: 2) %></td>
+						<td colspan="3" class="right">
+							<div class="btn-group">
+								<%#= link_to 'Vis', voucher, class: 'btn btn-default btn-xs' %>
+								<%= link_to 'Ret', edit_voucher_path(voucher), class: 'btn btn-default btn-xs' %>
+								<%= link_to 'Slet', voucher, method: :delete, data: { confirm: 'Er du sikker?' }, class: 'btn btn-default btn-xs' %>
+							</div>
+						</td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+</div>

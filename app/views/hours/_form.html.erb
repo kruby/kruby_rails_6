@@ -1,0 +1,52 @@
+<%= form_for(@hour, html: {class: 'form-horizontal', role: 'form'}) do |f| %>
+<%= f.hidden_field(:user_id, value: current_user.id) %>
+
+<% if @hour.errors.any? %>
+<div id="error_explanation">
+	<h2><%= pluralize(@hour.errors.count, (t :error)) %> forhindrede denne time registrering fra at blive vist:</h2>
+	<ul>
+		<% @hour.errors.full_messages.each do |msg| %>
+		<li><%= msg %></li>
+		<% end %>
+	</ul>
+</div>
+<% end %>
+
+<div class="form-group">
+    <%= f.label :partner_id, class: 'col-sm-2 control-label'  %>
+    <div class="col-sm-6">	
+        <%= collection_select :hour, :partner_id, (Partner.active).order(:name), :id, :name, {prompt: 'Vælg kunde'}, {class: 'form-control'} %>
+    </div>
+</div>
+
+<div class="form-group">
+	<%= f.label :timer, class: 'col-sm-2 control-label' %>
+	<div class="col-sm-6">	
+		<%= f.number_field :number, class: 'form-control' %>
+	</div>
+</div>
+
+<div class="form-group">
+	<%= f.label :beskrivelse, class: 'col-sm-2 control-label' %>
+	<div class="col-sm-6">	
+		<%= f.text_field :description, class: 'form-control' %>
+	</div>
+</div>
+
+<div class="form-group">
+	<%= f.label :dato, class: 'col-sm-2 control-label' %>
+	<div class="col-sm-6 date-select">	
+		<%= f.date_select :date, class: 'form-control' %>
+	</div>
+</div>
+
+<div class='form-group'>
+	<div class="actions col-sm-offset-2 col-sm-10">
+    <% if current_page?(action: 'new')%>
+      <%= f.submit('Opret', class: 'btn btn-info btn-xs') %>
+    <% else %>
+      <%= f.submit('Opdater', class: 'btn btn-info btn-xs') %>
+    <% end %>
+	</div>
+</div>
+<% end %>

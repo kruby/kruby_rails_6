@@ -1,0 +1,73 @@
+<div class="container">
+
+	<%= form_tag edit_multiple_assets_path do %>
+	<h2>
+		Tilføj fotos til <small><%= '"' + Post.find(params[:id]).title + '"' %></small>
+	</h2>
+
+	<div class="btn-group">
+		<%= submit_tag "Tilføj fotos", class: 'btn btn-default btn-xs' %>
+		<%= link_to('Tilbage', edit_post_path(params[:id]), class: 'btn btn-default btn-xs') %>
+	</div>
+
+	<%= hidden_field_tag :post_id, h(params[:id]) %>
+
+	<div class="table-responsive">
+		<table class="table table-striped table-hover">
+			<tr>
+				<th></th>
+				<th>Foto</th>
+				<th>Beskrivelse</th>
+				<th class='center-text'>Tekst</th>
+				<th class='center-text'>Foto</th>
+				<th class='center-text'>ID</th>
+	
+			</tr>
+			<% for asset in @assets %>
+			<% @image =  asset.photo.url(:thumb) %>
+			<% @image_show = asset.photo.url(:original) %>
+			<% @title = asset.description + ' (ID - ' + asset.id.to_s + ')' %>
+			<tr>
+				<td class="center-text">
+					<% if @array_of_ids.include?(asset.id) %>
+					√ <%#= check_box_tag nil, asset.id, true %>
+					<% else %>
+					<%= check_box_tag "asset_ids[]", asset.id %>
+					<% end %>
+				</td>
+				<td class='thumb' id='images'>
+					<%= link_to image_tag(@image), @image_show, {:class => "fancybox-button", :rel => "fancybox-button", :title => @title }%>
+				</td>	
+				<td><%= asset.description %></td>
+				<td><%= nice_date(asset.updated_at) rescue nil %></td>
+				<td><%= nice_date(asset.photo_updated_at) rescue nil %></td>
+				<td><%= asset.id %></td>
+			</tr>
+			<% end %>
+		</table>
+		<% end %>
+		<br />
+	</div>
+</div>
+
+<% content_for :javascript do %>
+
+<script>
+	//         $(document).ready(function() {
+	// 	$(".fancybox-button").fancybox({
+	// 		prevEffect		: 'none',
+	// 		nextEffect		: 'none',
+	// 		closeBtn		: false,
+	// 		helpers			: {
+	// 		title			: { type : 'inside' },
+	// 		buttons			: {}
+	// 		}
+	// 	});
+	// });
+
+	$(document).ready(function() {
+	  $("a.fancybox-button").fancybox();
+	});
+</script>
+
+<% end %>

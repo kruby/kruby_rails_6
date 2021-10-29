@@ -1,0 +1,46 @@
+<!-- Vi opdeler med content_for så vi kan styre hvad der bliver indsat hvor i viewer.html.erb under layouts -->
+<% content_for :head do %>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title><%= content_for?(:title) ? yield(:title) : "Kruby" %></title>
+<meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Kruby" %>">
+<link href="/assets/mini.gif" rel="shortcut icon"/>
+  <%= stylesheet_link_tag "application", media: "all" %>
+  <%#= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+  <%#= favicon_link_tag 'favicon.ico' %>
+  <%#= google_font_link_tag 'Ubuntu:400,500,700'%>
+  <%#= google_font_link_tag 'Fontdiner+Swanky'%>
+  <%#= google_font_link_tag 'Just+Me+Again+Down+Here'%>
+  <%#= google_font_link_tag 'Oswald:300,400,700,'%>
+  <%#= google_font_link_tag 'Roboto:400,400italic,500,500italic,700,700italic,900,900italic,'%>
+  <%#= google_font_link_tag 'Open+Sans+Condensed:700|Open+Sans:600,400,300'%>
+<% end%>
+
+<% content_for :body do %>
+  <%= render :partial => "viewer/partials/social_links_large_format.html.erb" %>
+  <header>
+    <%= image_tag "kruby_logo_top.png", :class => 'img-responsive', :alt => 'Kruby' %>
+    <%= render 'menusystem/navigation' %>
+  </header>
+  <main role="main">
+    <%= render 'viewer/partials/messages' %>
+  </main>
+  <div class="container">
+    <h1 class="forside">Velkommen til Kruby <small class="forside">kreativ webudvikling i skyen</small></h1>
+    <%= render 'viewer/partials/carousel'%>
+    <%= raw @content %>
+    <h2>Bloggen</h2>
+    <div class="blogposts">
+      <%= render 'viewer/partials/blog_posts'%>
+    </div>
+  	<div class="facebook">
+      <p><button id="ihavecookiesBtn">Åben cookie popup</button></p>
+      <p>Følg Kruby's FaceBook side der løbende bliver opdateret med aktuelle informationer vedr. Apple og deres produkter.</p>
+      <div class="fb-wrapper">
+
+          <%= raw(@facebook) %>
+      </div>
+    </div>
+  </div>
+  
+<% end %>

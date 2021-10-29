@@ -1,0 +1,40 @@
+<div class="container">
+	
+    <p id="notice"><%= notice %></p>
+
+        <p>
+        <strong>Description:</strong>
+        <%= @voucher.description %>
+    </p>
+
+        <p>
+        <strong>Number:</strong>
+        <%= @voucher.number %>
+    </p>
+
+        <p>
+        <strong>Relation:</strong>
+        <%= @voucher.relation_id %>
+    </p>
+
+        <p>
+        <strong>Date:</strong>
+        <%= @voucher.date %>
+    </p>
+
+        <p>
+        <strong>User:</strong>
+        <%= @voucher.user_id %>
+    </p>
+
+        <p>
+        <strong>Hourly rate:</strong>
+        <%= @voucher.hourly_rate %>
+    </p>
+
+    
+    <div class="btn-group">
+        <%= link_to 'Ret', edit_voucher_path(@voucher), class: 'btn btn-default btn-xs'%>
+        <%= link_to 'Tilbage', vouchers_path, class: 'btn btn-default btn-xs' %>
+    </div>
+</div>

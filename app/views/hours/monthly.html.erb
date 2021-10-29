@@ -1,0 +1,72 @@
+<div class="container">
+  <h1>Timeforbrug pr. måned</h1>
+  <% @counter = 0 %>
+  <% @month_counter = 0 %>
+  <% for hour in @hours %>
+  <% @counter = @counter + 1 %>
+  <% @year = l hour.date, format: :year %>
+  <%# l betyder at vi bruger I18 på hour.date og formatet :year under :date delen i da.yml filen %>
+  <% @month_name = l hour.date, format: :month %>
+  <% @month_number = hour.date.month %>
+  <% if @year != @year_previous %>
+  <% @month_number_max = @month_counter %>
+  <% @month_counter = 0 %>
+  <% @year_previous = @year %>
+  <% if @counter > 1 %>
+  <div class="table-responsive">
+    <tr>
+      <td class="monthly">Ialt</td>
+      <td class='text-right bold'><%= number_with_precision(Hour.yearly_hours(hour.date.year+1).sum(:number), locale: :da) rescue nil %></td>
+    </tr>
+    <tr>
+      <td class="monthly">Mdr.</td>
+      <td class='text-right bold'><%= @month_number_max %></td>
+    </tr>
+    <tr>
+      <td class="monthly">Gennemsnit</td>
+      <td class='text-right bold'><%= number_with_precision(Hour.yearly_hours(hour.date.year+1).sum(:number)/@month_number_max, locale: :da) rescue nil %></td>
+    </tr>
+    <tr>
+      <td class="monthly">Oms. pr. md.</td>
+      <td class='text-right bold'><%= number_with_precision(Hour.yearly_hours(hour.date.year+1).sum(:number)/@month_number_max * Voucher.average_hourly_rate, locale: :da, precision: 0) rescue nil %></td>
+    </tr>
+    <% end %>
+    <table class="table table-striped table-hover tabel_timer">
+      <tr>
+        <td colspan=2 class="size_14 bold center"><%= @year %></td>
+      </tr>
+      <tr>
+        <td class='year'>Måned</td>
+        <td class='text-right bold'>Antal</td>
+      </tr>
+      <% else %>
+      <% if @month_number != @month_previous %>
+      <% @month_counter = @month_counter + 1 %>
+      <% @month_previous = @month_number %>
+      <tr>
+        <td class="monthly"><%= @month_name.capitalize %></td>
+        <td class='text-right'><%= number_with_precision(Hour.monthly_hours(hour.date).sum(:number), locale: :da) rescue nil %></td>
+      </tr>
+      <% end %>
+      <% end %>
+      <% end %>
+      <% @month_number_max = @month_counter %>
+      <tr>
+        <td class="monthly bold">Ialt</td>
+        <td class='text-right bold'><%= number_with_precision(Hour.yearly_hours(hour.date.year).sum(:number), locale: :da) rescue nil %></td>
+      </tr>
+      <tr>
+        <td class="monthly">Mdr.</td>
+        <td class='text-right bold'><%= @month_number_max %></td>
+      </tr>
+      <tr>
+        <td class="monthly">Gennemsnit</td>
+        <td class='text-right bold'><%= number_with_precision(Hour.yearly_hours(hour.date.year).sum(:number)/@month_number_max, locale: :da) rescue nil %></td>
+      </tr>
+      <tr>
+        <td class="monthly">Oms. pr. md.</td>
+        <td class='text-right bold'><%= number_with_precision(Hour.yearly_hours(hour.date.year).sum(:number)/@month_number_max * Voucher.average_hourly_rate, locale: :da, precision: 0) rescue nil %></td>
+      </tr>
+    </table>
+  </div>
+</div>

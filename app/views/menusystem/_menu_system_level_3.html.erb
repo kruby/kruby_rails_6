@@ -1,0 +1,15 @@
+<% unless @level_3.nil? %>
+<ul class="dropdown-menu">
+  <% @level_3.each do |level_3| -%>
+  <% @no_route = 'No route ' + level_3.navlabel %>
+  <li>
+    <% if level_3.redirect? %>
+    <%= link_to(level_3.navlabel, '/'+ level_3.controller_redirect.to_s + '/' + level_3.action_redirect.to_s) rescue link_to @no_route.html_safe %>
+    <% else %>
+    <%= link_to(level_3.navlabel, '/'+ level_3.controller_name.to_s) rescue link_to @no_route.html_safe %>
+    <% end %>
+  </li>
+  <% end %>
+</ul>
+<% end %>	
+</li>

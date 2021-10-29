@@ -1,0 +1,10 @@
+<% if @post.errors.any? %>
+<div id="error_explanation">
+	<h2><%= pluralize(@post.errors.count, (t :error)) %> forhindrede denne post fra at blive vist:</h2>
+	<ul>
+		<% @post.errors.full_messages.each do |msg| %>
+		<li><%= msg %></li>
+		<% end %>
+	</ul>
+</div>
+<% end %>

@@ -1,0 +1,40 @@
+<div class="container">
+	
+    <p id="notice"><%= notice %></p>
+
+        <p>
+        <strong>Description:</strong>
+        <%= @asset.description %>
+    </p>
+
+        <p>
+        <strong>User:</strong>
+        <%= @asset.user_id %>
+    </p>
+
+        <p>
+        <strong>Photo file name:</strong>
+        <%= @asset.photo_file_name %>
+    </p>
+
+        <p>
+        <strong>Photo content type:</strong>
+        <%= @asset.photo_content_type %>
+    </p>
+
+        <p>
+        <strong>Photo file size:</strong>
+        <%= @asset.photo_file_size %>
+    </p>
+
+        <p>
+        <strong>Photo updated at:</strong>
+        <%= @asset.photo_updated_at %>
+    </p>
+
+    
+    <div class="btn-group">
+        <%= link_to 'Ret', edit_asset_path(@asset), class: 'btn btn-default btn-xs'%>
+        <%= link_to 'Tilbage', assets_path, class: 'btn btn-default btn-xs' %>
+    </div>
+</div>

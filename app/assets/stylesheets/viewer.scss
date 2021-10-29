@@ -1,0 +1,84 @@
+// Place all the styles related to the viewer controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+li {
+    display: block;
+}
+
+li span.glyphicon:before {
+    float: left;
+    margin: 2px 10px 0px 0px;
+}
+
+.right {
+    text-align: right;
+}
+
+body.frontend div#social_links_large_format {
+	float: left;
+	position: absolute;
+	top: 90px;
+	left: 0px;
+}
+
+body.frontend div#social_links_large_format a {
+	text-decoration: none;
+	border: none;
+	float: left;
+	margin-left: 6px;
+}
+
+body.frontend div#social_links_large_format a img {
+	text-decoration: none;
+	border: none;
+}
+
+@media only screen and (min-width: 1201px) {
+    body.frontend div#social_links_small_format {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    
+    div.fb-wrapper iframe {
+        float: left;
+        margin-right: 20px;
+    }
+
+    body.frontend div#social_links_large_format{
+    	display: none;
+    }
+
+    body.frontend div#social_links_small_format {
+    	float: left;
+        position: relative;
+        top: 15px;
+        left: 10px;
+    }
+    
+    body.frontend div#social_links_small_format a {
+    text-decoration: none;
+    border: none;
+    float: left;
+    margin-left: 6px;
+    }
+
+    table.tabel_timer {
+        float: left;
+        width: 100%;
+    }
+    
+    body.frontend div.container h1 small.forside {
+        display: none;
+    }
+
+}
+
+@media only screen and (max-width: 1201px) {
+    .navbar-nav .open li.dropdown-submenu ul.dropdown-menu > li > a {
+        padding-left: 40px;
+    }
+}

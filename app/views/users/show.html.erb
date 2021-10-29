@@ -1,0 +1,55 @@
+<div class="container">
+	
+    <p id="notice"><%= notice %></p>
+
+        <p>
+        <strong>Name:</strong>
+        <%= @user.name %>
+    </p>
+
+        <p>
+        <strong>Email:</strong>
+        <%= @user.email %>
+    </p>
+
+        <p>
+        <strong>Remember token:</strong>
+        <%= @user.remember_token %>
+    </p>
+
+        <p>
+        <strong>Remember token expires at:</strong>
+        <%= @user.remember_token_expires_at %>
+    </p>
+
+        <p>
+        <strong>Active:</strong>
+        <%= @user.active %>
+    </p>
+
+        <p>
+        <strong>Category:</strong>
+        <%= @user.category %>
+    </p>
+
+        <p>
+        <strong>Blogname:</strong>
+        <%= @user.blogname %>
+    </p>
+
+        <p>
+        <strong>Password hash:</strong>
+        <%= @user.password_hash %>
+    </p>
+
+        <p>
+        <strong>Password salt:</strong>
+        <%= @user.password_salt %>
+    </p>
+
+    
+    <div class="btn-group">
+        <%= link_to 'Ret', edit_user_path(@user), class: 'btn btn-default btn-xs'%>
+        <%= link_to 'Tilbage', users_path, class: 'btn btn-default btn-xs' %>
+    </div>
+</div>

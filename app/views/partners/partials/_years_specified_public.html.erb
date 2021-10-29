@@ -1,0 +1,15 @@
+<% @hours_total_year = partner.hours.yearly_hours(year).sum(:number) %>
+<% if @hours_total_year > 0 %>
+  <% @link_text = year.to_s + ' - ' + number_with_delimiter(@hours_total_year, locale: :da) rescue nil %>	
+  <tr class="row-fluid">
+  	<td colspan="12" class="text-left year">
+  		<strong><%= link_to @link_text, show_months_public_path(partner_id: session[:partner_id], year: year, q: params[:q]) %></strong>
+  	</td>
+  </tr>
+
+  <% if partner.id.to_s == params[:partner_id] and params[:year] == year.to_s %>
+  	<% for month_date in @month_dates %>
+  		<%= render partial: "partners/partials/months_specified_public", locals: {partner: partner, year: year, month_date: month_date} %>
+  	<% end %>
+  <% end %>
+<% end %>

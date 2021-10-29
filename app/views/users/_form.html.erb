@@ -1,0 +1,73 @@
+<%= form_for @user, html: { multipart: true, class: 'form-horizontal', role: 'form' } do |f| %>
+<%#= form_for(@user, html: {class: 'form-horizontal', role: 'form'}) do |f| %>
+<% if @user.errors.any? %>
+<div id="error_explanation">
+	<h2><%= pluralize(@user.errors.count, (t :error)) %> forhindrede denne user fra at blive vist:</h2>
+	<ul>
+		<% @user.errors.full_messages.each do |msg| %>
+		<li><%= msg %></li>
+		<% end %>
+	</ul>
+</div>
+<% end %>
+<div class="form-group">
+	<%= f.label :avatar, class: 'col-sm-2 control-label' %>
+	<div class="col-sm-10">	
+		<%= f.file_field :avatar, title: 'Find et passende bruger billede', class: 'btn-success btn' %>
+    <%= image_tag(@user.avatar.url(:thumb), {class: 'img-thumbnail', width: "30px" }) %>
+	</div>
+</div>
+<div class="form-group">
+	<%= f.label :name, class: 'col-sm-2 control-label' %>
+		<div class="col-sm-10">	            
+			<div class="input-group">
+				<span class="input-group-addon">
+					<%= f.check_box :active, type: 'checkbox' %>
+				</span>
+				<%= f.text_field :name, class: 'form-control' %>
+			</div>
+		</div>
+</div>
+<div class="form-group">
+	<%= f.label :email, class: 'col-sm-2 control-label' %>
+	<div class="col-sm-10">	
+		<%= f.text_field :email, class: 'form-control' %>
+	</div>
+</div>
+<div class="form-group">
+	<%= f.label :Password, class: 'col-sm-2 control-label' %>
+	<div class="col-sm-10">	
+		<%= f.text_field :password, class: 'form-control' %>
+	</div>
+</div>
+<div class="form-group">
+	<%= f.label :Password_bekræft, class: 'col-sm-2 control-label' %>
+	<div class="col-sm-10">	
+		<%= f.text_field :password_confirmation, class: 'form-control' %>
+	</div>
+</div>
+<div class="form-group">
+	<%= f.label :category, class: 'col-sm-2 control-label' %>
+	<div class="col-sm-10">	
+		<%= f.select(:category, ['User', 'Editor', 'Admin'], {}, :class => 'form-control') %>
+	</div>
+</div>
+<div class="form-group">
+	<%= f.label :blogname, class: 'col-sm-2 control-label' %>
+	<div class="col-sm-10">	
+		<%= f.text_field :blogname, class: 'form-control' %>
+	</div>
+</div>
+<div class='form-group'>
+	<div class="actions col-sm-offset-2 col-sm-10">
+		<%= f.submit('Opdater', class: 'btn btn-info btn-xs') %>
+	</div>
+</div>
+<% end %>
+
+<script>
+	$(document).ready(function() {
+		$('input[type=file]').bootstrapFileInput();
+		$('.file-inputs').bootstrapFileInput();
+	});
+</script>
