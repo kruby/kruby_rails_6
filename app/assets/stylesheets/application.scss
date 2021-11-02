@@ -19,31 +19,27 @@
 /*@import "config/colors";*/
 /*@import "config/bootstrap_variables";*/
 
-// External libraries
-@import "bootstrap/scss/bootstrap";
+/*Med @import kan du styre den nøjagtige rækkefølge for din css*/
 
-//$navbar-default-bg: #312312;
-//$light-orange: #ff8c00;
-//$navbar-default-color: $light-orange;
+/*@import "scaffolds";*/
+@import "custom";
+/*@import "viewer";
+@import "gdpr_popup";
+@import "session";
+@import "partners";
+@import "hours";*/
 
-/*//Med @import kan du styre den nøjagtige rækkefølge for din css*/
 
-//@import "scaffolds";
-/*@import "bootstrap";
-//@import "custom";
-//@import "viewer";
-*/
-
-/*input.checkbox {
+input.checkbox {
 	padding-top: 6px;
 }
 
-div .panel-body .swanky {
+div .panel-body .swanky { 
     font-family: 'Fontdiner Swanky', arial, sans-serif;
     font-size: 20px;
 }
 
-div .panel-body .justme {
+div .panel-body .justme { 
     font-family: 'Just Me Again Down Here', arial, sans-serif;
     font-size: 20px;
 }
@@ -86,7 +82,7 @@ body.backend div#social_links_large_format a img {
         top: 15px;
         left: 10px;
     }
-
+    
     body.backend div#social_links_small_format a {
     text-decoration: none;
     border: none;
@@ -146,4 +142,4 @@ span.movies {
   margin-bottom: 10px;
   margin-left: 2px;
   font-size: 16px;
-}*/
+}

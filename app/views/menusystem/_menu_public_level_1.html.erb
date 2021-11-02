@@ -2,14 +2,14 @@
 <% @no_route = 'No route ' + level_1.navlabel %>
   <% if level_1.children.count > 0 %>
      <% @data_toggle = 'dropdown' %>
-     <% @class = 'dropdown-toggle' %>
+     <% @class = 'nav-link active' %>
      <% @caret = "&nbsp;<b class='caret'></b>" %>
   <% else %>
      <% @data_toggle = "none" %>
-     <% @class = "none" %>
+     <% @class = "nav-link active" %>
      <% @caret = "" %>
   <% end %>
-  <li class="dropdown">
+  <li class="nav-item">
 	<% if level_1.redirect? %>
 	  <%= link_to(raw(level_1.navlabel + @caret), '/'+ level_1.controller_redirect.to_s + '/' + level_1.action_redirect.to_s, class: @class, data: {toggle: @data_toggle}) rescue link_to @no_route.html_safe %>
 	<% else %>
@@ -24,3 +24,4 @@
   <% end %>
 </li>
 <% end %>
+  

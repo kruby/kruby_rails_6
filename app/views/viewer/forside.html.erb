@@ -5,8 +5,12 @@
 <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Kruby" %>">
 <link href="/assets/mini.gif" rel="shortcut icon"/>
   <%= stylesheet_link_tag "application", media: "all" %>
+  
+  <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   <%#= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
   <%#= favicon_link_tag 'favicon.ico' %>
   <%#= google_font_link_tag 'Ubuntu:400,500,700'%>
   <%#= google_font_link_tag 'Fontdiner+Swanky'%>
@@ -22,9 +26,11 @@
     <%= image_tag "kruby_logo_top.png", :class => 'img-responsive', :alt => 'Kruby' %>
     <%= render 'menusystem/navigation' %>
   </header>
+  
   <main role="main">
     <%= render 'viewer/partials/messages' %>
   </main>
+  
   <div class="container">
     <h1 class="forside">Velkommen til Kruby <small class="forside">kreativ webudvikling i skyen</small></h1>
     <%= render 'viewer/partials/carousel'%>
@@ -44,3 +50,5 @@
   </div>
   
 <% end %>
+
+
